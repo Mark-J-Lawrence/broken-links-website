@@ -1,0 +1,48 @@
+{
+  "name": "broken-links-website",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "vsintellicode.typescript.completionsEnabled": false,
+        "vsintellicode.modify.editor.suggestSelection": "disabled",
+        "errorLens.onSave": true,
+        "errorLens.messageEnabled": true,
+        "versionlens.suggestions.showOnStartup": true,
+        "editor.formatOnSave": true,
+        "eslint.workingDirectories": [
+          "./src"
+        ],
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "usernamehw.errorlens",
+        "igorsbitnev.error-gutters",
+        "wayou.vscode-todo-highlight",
+        "pflannery.vscode-versionlens",
+        "bierner.markdown-emoji",
+        "gruntfuggly.todo-tree",
+        "github.vscode-github-actions"
+      ]
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    }
+  },
+  "forwardPorts": [
+    3000,
+    3001
+  ],
+  "privileged": true,
+  "remoteUser": "root",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces,type=bind",
+  "workspaceFolder": "/workspaces",
+  "postStartCommand": "git config --global --add safe.directory /workspaces; git config commit.gpgsign false",
+  "postAttachCommand": "/post_script/initialise_dev_container.sh"
+}
