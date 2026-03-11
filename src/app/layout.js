@@ -79,7 +79,7 @@ const SCHEMA_ORG = {
   url: BASE_URL,
   logo: 'https://www.brokenlinksmusic.co.uk/android-chrome-512x512.png',
   image: 'https://www.brokenlinksmusic.co.uk/images/uploads/2021/02/Split-4000x2250-1-1024x576.jpg',
-  description: 'Industrial rock band from Southampton, UK, formed in 2008.',
+  description: 'Broken Links create dark, melodic alternative rock driven by electronics, tension, and weight. Mark Lawrence (vocals/guitars), Lewis Betteridge (bass), and Phil Boulter (drums) formed in 2008 in Eastleigh, Hampshire. Three EPs, three albums, one remix record. Independent, self-built, always moving forward.',
   genre: ['Industrial Rock', 'Alternative Rock', 'Post-Rock'],
   foundingDate: '2008',
   foundingLocation: {
@@ -105,6 +105,16 @@ const SCHEMA_ORG = {
     'https://brokenlinksmusic.bandcamp.com',
     'https://open.spotify.com/artist/broken-links',
   ],
+  subjectOf: {
+    '@type': 'VideoObject',
+    name: 'Fatalism (Official Video)',
+    description: 'Official music video for Fatalism — taken from the album Conflict::States (2021).',
+    thumbnailUrl: 'https://img.youtube.com/vi/Qu9HaA3J0W0/maxresdefault.jpg',
+    uploadDate: '2021-11-05',
+    contentUrl: 'https://www.youtube.com/watch?v=Qu9HaA3J0W0',
+    embedUrl: 'https://www.youtube.com/embed/Qu9HaA3J0W0',
+    duration: 'PT4M15S'
+  }
 }
 
 export default function RootLayout({ children }) {
