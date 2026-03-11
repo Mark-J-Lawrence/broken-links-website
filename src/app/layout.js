@@ -77,6 +77,8 @@ const SCHEMA_ORG = {
   '@type': 'MusicGroup',
   name: 'Broken Links',
   url: BASE_URL,
+  logo: 'https://www.brokenlinksmusic.co.uk/android-chrome-512x512.png',
+  image: 'https://www.brokenlinksmusic.co.uk/images/uploads/2021/02/Split-4000x2250-1-1024x576.jpg',
   description: 'Industrial rock band from Southampton, UK, formed in 2008.',
   genre: ['Industrial Rock', 'Alternative Rock', 'Post-Rock'],
   foundingDate: '2008',
