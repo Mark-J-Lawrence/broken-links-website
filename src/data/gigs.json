@@ -2531,5 +2531,22 @@
     "notes": "The Vegas + Broken Links",
     "tour": "",
     "status": "active"
-  }
+  },
+  {
+    "id": 150,
+    "slug": "2025-06-14-winchester-gate",
+    "title": "The Winchester Gate, Salisbury",
+    "date": "2025-06-14",
+    "time": "13:00",
+    "venueSlug": "the-winchester-gate",
+    "venueName": "The Winchester Gate",
+    "city": "Salisbury",
+    "country": "UK",
+    "admittance": "All Ages/Licensed",
+    "price": "",
+    "ticketUrl": "",
+    "notes": "",
+    "tour": "",
+    "status": "active"
+  },
 ]
