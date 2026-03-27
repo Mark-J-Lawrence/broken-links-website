@@ -3,6 +3,7 @@ import HomeClient from '../components/HomeClient'
 import gigsData from '../data/gigs.json'
 import videosData from '../data/videos.json'
 import photosData from '../data/photos.json'
+import albumsData from '../data/albums.json'
 
 /* ── Server component: fetch real data ───────────────────────── */
 export default function HomePage() {
@@ -27,7 +28,17 @@ export default function HomePage() {
     }
   }
 
-  return <HomeClient latestPosts={latestPosts} nextGig={nextGig} allVideos={allVideos} allPhotos={allPhotos} />
+  // Calculate stats dynamically
+  const stats = {
+    albums: albumsData.length,
+    newsArticles: allPosts.length,
+    liveShows: gigsData.length,
+    photoAlbums: photosData.length,
+    totalPhotos: allPhotos.length,
+    yearsActive: new Date().getFullYear() - 2008,
+  }
+
+  return <HomeClient latestPosts={latestPosts} nextGig={nextGig} allVideos={allVideos} allPhotos={allPhotos} stats={stats} albums={albumsData} />
 }
 
 

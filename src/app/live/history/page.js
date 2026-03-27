@@ -8,8 +8,12 @@ export const metadata = {
   description: 'Broken Links complete live show history — every gig, every venue.',
 }
 
-/* ── Sort all gigs ───────────────────────────────────────────── */
-const allGigs = [...gigsData].sort((a, b) => new Date(b.date) - new Date(a.date))
+/* ── Filter past gigs and sort ───────────────────────────────── */
+const today = new Date()
+today.setHours(0, 0, 0, 0) // Start of today
+const allGigs = [...gigsData]
+  .filter(gig => new Date(gig.date) < today) // Only past gigs
+  .sort((a, b) => new Date(b.date) - new Date(a.date))
 
 /* ── Group by year ───────────────────────────────────────────── */
 const gigsByYear = allGigs.reduce((acc, gig) => {

@@ -32,33 +32,7 @@ function useReveal() {
   }, [])
 }
 
-const ALBUMS = [
-  { title: 'Konflix::Statez',                  year: '2022', slug: 'konflux-statez',                  cover: '/images/uploads/2022/03/konflix-1.jpg' },
-  { title: 'Conflict::States',                 year: '2021', slug: 'conflict-states',                 cover: '/images/uploads/2021/02/Broken-Links-Conflict-States-1600x1600-1.jpg' },
-  { title: 'Divide/Restore',                   year: '2015', slug: 'divide-restore',                  cover: '/images/uploads/2009/04/broken-links-divide-restore-cover-800.jpg' },
-  { title: 'Disasters: Ways to Leave a Scene', year: '2012', slug: 'disasters-ways-to-leave-a-scene', cover: '/images/uploads/2009/04/disasters-ways-to-leave-a-scene-cover-800.jpg' },
-]
 
-const STATS = [
-  { number: '4', label: 'Albums Released' },
-  { number: '189+', label: 'News Articles' },
-  { number: '149+', label: 'Live Shows' },
-  { number: '39',   label: 'Photo Albums' },
-  { number: '18',  label: 'Years Active' },
-]
-
-const TICKER_ITEMS = [
-  'New material in progress',
-  'Broken Links',
-  'Alternative Rock',
-  'UK',
-  'Est. 2008',
-  'brokenlinksmusic.co.uk',
-  '4 albums',
-  '189 news articles',
-  '149+ live shows',
-  '912 photos',
-]
 
 /* ── Photo Modal ────────────────────────────────────────────── */
 function PhotoModal({ photo, allPhotos, onClose, onNavigate }) {
@@ -322,7 +296,19 @@ function VideoModal({ video, onClose }) {
 }
 
 /* ── Ticker ─────────────────────────────────────────────────── */
-function Ticker() {
+function Ticker({ stats }) {
+  const TICKER_ITEMS = [
+    'New material in progress',
+    'Broken Links',
+    'Alternative Rock',
+    'UK',
+    'Est. 2008',
+    'brokenlinksmusic.co.uk',
+    `${stats.albums} albums`,
+    `${stats.newsArticles} news articles`,
+    `${stats.liveShows} live shows`,
+    `${stats.totalPhotos} photos`,
+  ]
   const doubled = [...TICKER_ITEMS, ...TICKER_ITEMS]
   return (
     <div className="ticker-wrap" aria-hidden="true">
@@ -553,8 +539,20 @@ function NextShowBanner({ gig }) {
 }
 
 /* ── Main Client Component ───────────────────────────────────── */
-export default function HomeClient({ latestPosts, nextGig, allVideos = [], allPhotos = [] }) {
+export default function HomeClient({ latestPosts, nextGig, allVideos = [], allPhotos = [], stats, albums = [] }) {
   useReveal()
+  
+  // Create stats array from the stats object
+  const STATS = [
+    { number: stats.albums.toString(), label: 'Albums Released' },
+    { number: stats.newsArticles.toString(), label: 'News Articles' },
+    { number: stats.liveShows.toString(), label: 'Live Shows' },
+    { number: stats.photoAlbums.toString(), label: 'Photo Albums' },
+    { number: stats.yearsActive.toString(), label: 'Years Active' },
+  ]
+  
+  // Use albums data passed from server
+  const ALBUMS = albums
   
   // Shuffle videos at runtime (every page load gets different videos)
   const [featuredVideos, setFeaturedVideos] = useState([])
@@ -694,7 +692,7 @@ export default function HomeClient({ latestPosts, nextGig, allVideos = [], allPh
       </section>
 
       {/* ── TICKER ───────────────────────────────────────────── */}
-      <Ticker />
+      <Ticker stats={stats} />
 
       {/* ── NEXT SHOW BANNER ─────────────────────────────────── */}
       <NextShowBanner gig={nextGig} />
@@ -810,7 +808,7 @@ export default function HomeClient({ latestPosts, nextGig, allVideos = [], allPh
             marginTop: 16, fontFamily: 'var(--font-mono)', fontSize: '0.7rem',
             letterSpacing: '0.1em', color: 'var(--text-dim)', textAlign: 'center',
           }}>
-            39 albums · 912 photos
+            {stats.photoAlbums} albums · {stats.totalPhotos} photos
           </p>
         </div>
       </section>
