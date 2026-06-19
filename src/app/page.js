@@ -10,13 +10,6 @@ export default function HomePage() {
   const allPosts = getAllPosts()
   const latestPosts = allPosts.slice(0, 3)
 
-  // Find next upcoming gig (or most recent past gig as fallback)
-  const today = new Date().toISOString().slice(0, 10)
-  const sorted = [...gigsData].sort((a, b) => new Date(a.date) - new Date(b.date))
-  const nextGig = sorted.find(g => g.date >= today && g.status !== 'cancelled')
-    || [...sorted].reverse().find(g => g.status !== 'cancelled')
-    || null
-
   // Pass all videos to client component for runtime shuffling
   const allVideos = videosData
 
@@ -38,7 +31,8 @@ export default function HomePage() {
     yearsActive: new Date().getFullYear() - 2008,
   }
 
-  return <HomeClient latestPosts={latestPosts} nextGig={nextGig} allVideos={allVideos} allPhotos={allPhotos} stats={stats} albums={albumsData} />
+  // nextGig is derived client-side in HomeClient so it always reflects today's real date
+  return <HomeClient latestPosts={latestPosts} gigsData={gigsData} allVideos={allVideos} allPhotos={allPhotos} stats={stats} albums={albumsData} />
 }
 
 

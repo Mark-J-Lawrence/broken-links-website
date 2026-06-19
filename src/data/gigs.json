@@ -2548,5 +2548,22 @@
     "notes": "",
     "tour": "",
     "status": "active"
+  },
+  {
+    "id": 151,
+    "slug": "2026-09-12-music-in-the-city",
+    "title": "Music in the City, Southampton",
+    "date": "2026-09-12",
+    "time": null,
+    "venueSlug": "music-in-the-city",
+    "venueName": "Music in the City",
+    "city": "Southampton",
+    "country": "UK",
+    "admittance": "All Ages",
+    "price": "",
+    "ticketUrl": "https://musicinthecity.org/",
+    "notes": "",
+    "tour": "",
+    "status": "active"
   }
 ]

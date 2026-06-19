@@ -539,9 +539,19 @@ function NextShowBanner({ gig }) {
 }
 
 /* ── Main Client Component ───────────────────────────────────── */
-export default function HomeClient({ latestPosts, nextGig, allVideos = [], allPhotos = [], stats, albums = [] }) {
+export default function HomeClient({ latestPosts, gigsData = [], allVideos = [], allPhotos = [], stats, albums = [] }) {
   useReveal()
-  
+
+  // Derive next gig client-side so the date comparison always uses today's real date,
+  // not the date the static site was last built.
+  const nextGig = (() => {
+    const today = new Date().toISOString().slice(0, 10)
+    const sorted = [...gigsData].sort((a, b) => new Date(a.date) - new Date(b.date))
+    return sorted.find(g => g.date >= today && g.status !== 'cancelled')
+      || [...sorted].reverse().find(g => g.status !== 'cancelled')
+      || null
+  })()
+
   // Create stats array from the stats object
   const STATS = [
     { number: stats.albums.toString(), label: 'Albums Released' },

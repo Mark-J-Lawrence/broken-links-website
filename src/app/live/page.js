@@ -1,8 +1,6 @@
-import Link from 'next/link'
-import PageTitle from '../../components/PageTitle'
-import MailingListForm from '../../components/MailingListForm'
 import gigsData from '../../data/gigs.json'
 import venuesData from '../../data/venues.json'
+import LiveClient from '../../components/LiveClient'
 
 export const metadata = {
   title: 'Live',
@@ -12,275 +10,98 @@ export const metadata = {
   },
 }
 
-/* ── Split into upcoming vs past ─────────────────────────────── */
-const today = new Date().toISOString().slice(0, 10)
-const allGigs = [...gigsData].sort((a, b) =>
-  new Date(b.date) - new Date(a.date)
+// Build-time structured data for all gigs that were upcoming at deploy time.
+// This provides a baseline for search engine crawlers; the client component
+// re-evaluates today's date in the browser so the UI is always accurate.
+const buildTimeToday = new Date().toISOString().slice(0, 10)
+const allGigsSorted = [...gigsData].sort((a, b) => new Date(b.date) - new Date(a.date))
+const upcomingAtBuild = allGigsSorted.filter(
+  g => g.date >= buildTimeToday && g.status !== 'cancelled'
 )
-const upcomingShows = allGigs.filter(g => g.date >= today && g.status !== 'cancelled')
-const recentShows   = allGigs.filter(g => g.date < today).slice(0, 5)
 
-/* ── Show Row ────────────────────────────────────────────────── */
-function ShowRow({ gig, index }) {
-  const d = new Date(gig.date)
-  const day   = d.getUTCDate().toString().padStart(2, '0')
-  const month = d.toLocaleDateString('en-GB', { month: 'short', timeZone: 'UTC' }).toUpperCase()
-  const year  = d.getUTCFullYear()
+const eventSchemas = upcomingAtBuild.map(gig => {
+  const venue = venuesData.find(v => v.slug === gig.venueSlug) || {}
+  const startDateTime = `${gig.date}T${gig.time || '19:00'}:00`
+  const endDateTime = gig.time
+    ? `${gig.date}T${String(parseInt(gig.time.split(':')[0]) + 3).padStart(2, '0')}:00:00`
+    : `${gig.date}T22:00:00`
 
-  const isPast = gig.date < today
-  const hasTickets = gig.ticketUrl && !gig.ticketUrl.includes('brokenlinksmusic.co.uk')
-
-  return (
-    <div className={`show-item reveal delay-${(index % 6) + 1}`}>
-      <div className="show-date">
-        <span className="show-date-day">{day}</span>
-        {month} {year}
-      </div>
-
-      <div className="show-info">
-        <p className="show-venue">
-          <Link href={`/live/venues/${gig.venueSlug}`} className="show-venue-link">
-            {gig.venueName}
-          </Link>
-        </p>
-        <p className="show-location">
-          {gig.city}{gig.city && gig.country ? ', ' : ''}{gig.country}
-        </p>
-        <p className="show-notes">{gig.notes || '\u00A0'}</p>
-      </div>
-
-      <div className="show-action">
-        {isPast || !hasTickets ? (
-          <Link
-            href={`/live/venues/${gig.venueSlug}`}
-            className="btn btn-outline"
-            style={{ fontSize: '0.65rem', padding: '8px 16px' }}
-          >
-            Venue →
-          </Link>
-        ) : (
-          <a
-            href={gig.ticketUrl}
-            className="btn btn-outline"
-            style={{ fontSize: '0.65rem', padding: '8px 16px' }}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Tickets
-          </a>
-        )}
-      </div>
-    </div>
-  )
-}
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'MusicEvent',
+    name: `Broken Links at ${gig.venueName}`,
+    description: gig.notes || `Broken Links live performance at ${gig.venueName} in ${gig.city}, ${gig.country}. Experience high-energy alternative rock music.`,
+    startDate: startDateTime,
+    endDate: endDateTime,
+    eventStatus: gig.status === 'cancelled'
+      ? 'https://schema.org/EventCancelled'
+      : gig.status === 'postponed'
+      ? 'https://schema.org/EventPostponed'
+      : 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    image: [
+      'https://www.brokenlinksmusic.co.uk/images/uploads/2021/02/Split-4000x2250-1-1024x576.jpg',
+      'https://www.brokenlinksmusic.co.uk/images/uploads/2018/03/0007-9.jpg'
+    ],
+    location: {
+      '@type': 'Place',
+      name: gig.venueName,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: venue.address || '',
+        addressLocality: gig.city,
+        addressRegion: venue.province || '',
+        postalCode: venue.postcode || '',
+        addressCountry: gig.country
+      }
+    },
+    organizer: {
+      '@type': 'MusicGroup',
+      name: 'Broken Links',
+      url: 'https://www.brokenlinksmusic.co.uk',
+      sameAs: [
+        'https://www.facebook.com/brokenlinksmusic',
+        'https://www.instagram.com/brokenlinksmusic',
+        'https://www.youtube.com/brokenlinksmusic',
+        'https://open.spotify.com/artist/brokenlinks'
+      ]
+    },
+    performer: {
+      '@type': 'MusicGroup',
+      name: 'Broken Links',
+      url: 'https://www.brokenlinksmusic.co.uk'
+    },
+    offers: gig.ticketUrl && !gig.ticketUrl.includes('brokenlinksmusic.co.uk') ? {
+      '@type': 'Offer',
+      url: gig.ticketUrl,
+      price: gig.price === 'Free' ? '0' : gig.price || '10',
+      priceCurrency: 'GBP',
+      availability: 'https://schema.org/InStock',
+      validFrom: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+    } : {
+      '@type': 'Offer',
+      url: `https://www.brokenlinksmusic.co.uk/live/venues/${gig.venueSlug}`,
+      price: gig.price === 'Free' ? '0' : gig.price || '10',
+      priceCurrency: 'GBP',
+      availability: 'https://schema.org/InStock',
+      validFrom: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+    }
+  }
+})
 
 export default function LivePage() {
-  // Generate Event structured data for upcoming shows
-  const eventSchemas = upcomingShows.map(gig => {
-    const venue = venuesData.find(v => v.slug === gig.venueSlug) || {}
-    const startDateTime = `${gig.date}T${gig.time || '19:00'}:00`
-    const endDateTime = gig.time
-      ? `${gig.date}T${String(parseInt(gig.time.split(':')[0]) + 3).padStart(2, '0')}:00:00`
-      : `${gig.date}T22:00:00`
-    
-    return {
-      '@context': 'https://schema.org',
-      '@type': 'MusicEvent',
-      name: `Broken Links at ${gig.venueName}`,
-      description: gig.notes || `Broken Links live performance at ${gig.venueName} in ${gig.city}, ${gig.country}. Experience high-energy alternative rock music.`,
-      startDate: startDateTime,
-      endDate: endDateTime,
-      eventStatus: gig.status === 'cancelled'
-        ? 'https://schema.org/EventCancelled'
-        : gig.status === 'postponed'
-        ? 'https://schema.org/EventPostponed'
-        : 'https://schema.org/EventScheduled',
-      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-      image: [
-        'https://www.brokenlinksmusic.co.uk/images/uploads/2021/02/Split-4000x2250-1-1024x576.jpg',
-        'https://www.brokenlinksmusic.co.uk/images/uploads/2018/03/0007-9.jpg'
-      ],
-      location: {
-        '@type': 'Place',
-        name: gig.venueName,
-        address: {
-          '@type': 'PostalAddress',
-          streetAddress: venue.address || '',
-          addressLocality: gig.city,
-          addressRegion: venue.province || '',
-          postalCode: venue.postcode || '',
-          addressCountry: gig.country
-        }
-      },
-      organizer: {
-        '@type': 'MusicGroup',
-        name: 'Broken Links',
-        url: 'https://www.brokenlinksmusic.co.uk',
-        sameAs: [
-          'https://www.facebook.com/brokenlinksmusic',
-          'https://www.instagram.com/brokenlinksmusic',
-          'https://www.youtube.com/brokenlinksmusic',
-          'https://open.spotify.com/artist/brokenlinks'
-        ]
-      },
-      performer: {
-        '@type': 'MusicGroup',
-        name: 'Broken Links',
-        url: 'https://www.brokenlinksmusic.co.uk'
-      },
-      offers: gig.ticketUrl && !gig.ticketUrl.includes('brokenlinksmusic.co.uk') ? {
-        '@type': 'Offer',
-        url: gig.ticketUrl,
-        price: gig.price === 'Free' ? '0' : gig.price || '10',
-        priceCurrency: 'GBP',
-        availability: 'https://schema.org/InStock',
-        validFrom: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
-      } : {
-        '@type': 'Offer',
-        url: `https://www.brokenlinksmusic.co.uk/live/venues/${gig.venueSlug}`,
-        price: gig.price === 'Free' ? '0' : gig.price || '10',
-        priceCurrency: 'GBP',
-        availability: 'https://schema.org/InStock',
-        validFrom: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
-      }
-    }
-  })
-
   return (
     <>
-      {/* Event structured data for all upcoming shows */}
+      {/* Event structured data for search engine crawlers */}
       {eventSchemas.length > 0 && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(eventSchemas)
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchemas) }}
         />
       )}
 
-      {/* ── Page Hero ─────────────────────────────────────────── */}
-      <section className="page-hero">
-        <div className="container">
-          <PageTitle
-            label="On Tour"
-            title="Live Shows"
-            subtitle={upcomingShows.length > 0
-              ? `${upcomingShows.length} upcoming date${upcomingShows.length !== 1 ? 's' : ''} — tickets available now.`
-              : 'No upcoming shows scheduled — check back soon.'}
-          />
-        </div>
-      </section>
-
-      {/* ── Upcoming Shows ────────────────────────────────────── */}
-      <section className="page-section">
-        <div className="container">
-          <div className="section-header reveal">
-            <div>
-              <p className="section-label">Upcoming</p>
-              <h2 className="section-title">Tour Dates</h2>
-            </div>
-            <Link href="/live/history" className="section-link">
-              Show history →
-            </Link>
-          </div>
-
-          {upcomingShows.length > 0 ? (
-            <div className="shows-list">
-              {upcomingShows.map((gig, i) => (
-                <ShowRow key={gig.id} gig={gig} index={i} />
-              ))}
-            </div>
-          ) : (
-            <>
-              <div className="no-shows reveal">
-                <p className="no-shows-text">No upcoming shows scheduled.</p>
-                <p className="no-shows-sub">Check back soon or follow us on social media for announcements.</p>
-              </div>
-
-              {/* Show most recent past shows as context */}
-              {recentShows.length > 0 && (
-                <>
-                  <div className="section-header reveal" style={{ marginTop: 48 }}>
-                    <div>
-                      <p className="section-label">Recent</p>
-                      <h2 className="section-title">Past Shows</h2>
-                    </div>
-                    <Link href="/live/history" className="section-link">
-                      Full history →
-                    </Link>
-                  </div>
-                  <div className="shows-list">
-                    {recentShows.map((gig, i) => (
-                      <ShowRow key={gig.id} gig={gig} index={i} />
-                    ))}
-                  </div>
-                </>
-              )}
-            </>
-          )}
-        </div>
-      </section>
-
-      {/* ── Mailing List CTA ──────────────────────────────────── */}
-      <section className="page-section" style={{ background: 'var(--surface)' }}>
-        <div className="container">
-          <div className="cta-block reveal">
-            <div className="cta-block-corner cta-block-corner-tl" />
-            <div className="cta-block-corner cta-block-corner-br" />
-            <div style={{ maxWidth: 520 }}>
-              <p className="section-label" style={{ marginBottom: 12 }}>Never Miss a Show</p>
-              <h2 style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)',
-                color: 'var(--white)',
-                marginBottom: 12,
-              }}>
-                Get tour announcements first
-              </h2>
-              <p style={{ color: 'var(--text-muted)', marginBottom: 24, fontSize: '0.9rem' }}>
-                Sign up to the mailing list and be the first to know about new tour dates and ticket sales.
-              </p>
-              <MailingListForm />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Quick Links ───────────────────────────────────────── */}
-      <section className="page-section">
-        <div className="container">
-          <div className="section-header reveal">
-            <div>
-              <p className="section-label">More</p>
-              <h2 className="section-title">Quick Links</h2>
-            </div>
-          </div>
-          <div className="grid-3">
-            <Link href="/live/history" className="quick-link-card reveal delay-1">
-              <span className="quick-link-icon">◎</span>
-              <div>
-                <p className="quick-link-title">Show History</p>
-                <p className="quick-link-desc">Browse all {allGigs.length} past performances</p>
-              </div>
-            </Link>
-            <Link href="/photos" className="quick-link-card reveal delay-2">
-              <span className="quick-link-icon">◈</span>
-              <div>
-                <p className="quick-link-title">Live Photos</p>
-                <p className="quick-link-desc">912 photos from live shows</p>
-              </div>
-            </Link>
-            <Link href="/videos" className="quick-link-card reveal delay-3">
-              <span className="quick-link-icon">▶</span>
-              <div>
-                <p className="quick-link-title">Live Videos</p>
-                <p className="quick-link-desc">Watch live recordings on YouTube</p>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* All display logic runs client-side so today's date is always current */}
+      <LiveClient gigsData={gigsData} />
     </>
   )
 }
-

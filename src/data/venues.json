@@ -982,5 +982,17 @@
     "country": "UK",
     "phone": "01202 555 595",
     "website": "www.myspace.com/ibar"
+  },
+  {
+    "id": 148,
+    "slug": "music-in-the-city",
+    "name": "Music in the City",
+    "address": "",
+    "city": "Southampton",
+    "province": "Hampshire",
+    "postcode": "",
+    "country": "UK",
+    "phone": "",
+    "website": "https://musicinthecity.org/"
   }
 ]
