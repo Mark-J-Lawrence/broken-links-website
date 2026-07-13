@@ -2552,18 +2552,18 @@
   {
     "id": 151,
     "slug": "2026-09-12-music-in-the-city",
-    "title": "HMV (Music in the City), Southampton",
+    "title": "HMV, Southampton",
     "date": "2026-09-12",
     "time": "12:00",
-    "venueSlug": "music-in-the-city",
-    "venueName": "Music in the City",
+    "venueSlug": "HMV",
+    "venueName": "HMV",
     "city": "Southampton",
     "country": "UK",
     "admittance": "All Ages",
     "price": "Free",
     "ticketUrl": "https://musicinthecity.org/",
-    "notes": "",
-    "tour": "",
+    "notes": "Music in the City (on stage @ 12:00)",
+    "tour": "Music in the City (on stage @ 12:00)",
     "status": "active"
   }
 ]
