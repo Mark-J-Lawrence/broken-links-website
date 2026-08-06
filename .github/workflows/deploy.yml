@@ -1,41 +1,64 @@
-name: Build and Deploy to GitHub Pages
-
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-      - name: Install dependencies
-        run: npm ci
-      - name: Build static site
-        run: npm run build
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./out
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+1| name: Build and Deploy to GitHub Pages
+2| 
+3| on:
+4|   push:
+5|     branches: [main]
+6|   workflow_dispatch:
+7| 
+8| permissions:
+9|   contents: read
+10|   pages: write
+11|   id-token: write
+12| 
+13| jobs:
+14|   build:
+15|     runs-on: ubuntu-latest
+16|     steps:
+17|       - uses: actions/checkout@v4
+18|       - name: Setup Node.js
+19|         uses: actions/setup-node@v4
+20|         with:
+21|           node-version: '20'
+22|           cache: 'npm'
+23|       - name: Install dependencies
+24|         run: npm ci
+25|       - name: Build static site
+26|         run: npm run build
+27|       - name: Upload artifact
+28|         uses: actions/upload-pages-artifact@v3
+29|         with:
+30|           path: ./out
+31| 
+32|   deploy:
+33|     needs: build
+34|     runs-on: ubuntu-latest
+35|     # add explicit job-level permissions to ensure id-token/pages access on this job
+36|     permissions:
+37|       pages: write
+38|       id-token: write
+39|       contents: read
+40|     environment:
+41|       name: github-pages
+42|       url: ${{ steps.deployment.outputs.page_url }}
+43|     steps:
+44|       - name: Debug runner clock & env
+45|         run: |
+46|           echo "== UTC date =="; date -u
+47|           echo "== Local date =="; date
+48|           if command -v timedatectl >/dev/null 2>&1; then
+49|             echo "== timedatectl status =="; timedatectl status || true
+50|           fi
+51|           echo "== uname =="; uname -a
+52|           echo "== whoami =="; whoami
+53|       - name: Fetch Actions OIDC JWKS (debug)
+54|         run: |
+55|           echo "Fetching JWKS from https://token.actions.githubusercontent.com/.well-known/jwks"
+56|           curl -sS https://token.actions.githubusercontent.com/.well-known/jwks -o /tmp/jwks.json || true
+57|           if command -v jq >/dev/null 2>&1; then
+58|             echo "JWKS keys count:"; jq '.keys | length' /tmp/jwks.json || cat /tmp/jwks.json || true
+59|           else
+60|             cat /tmp/jwks.json || true
+61|           fi
+62|       - name: Deploy to GitHub Pages
+63|         id: deployment
+64|         uses: actions/deploy-pages@v4
