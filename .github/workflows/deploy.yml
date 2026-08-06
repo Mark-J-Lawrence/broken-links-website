@@ -32,33 +32,10 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    # add explicit job-level permissions to ensure id-token/pages access on this job
-    permissions:
-      pages: write
-      id-token: write
-      contents: read
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Debug runner clock & env
-        run: |
-          echo "== UTC date =="; date -u
-          echo "== Local date =="; date
-          if command -v timedatectl >/dev/null 2>&1; then
-            echo "== timedatectl status =="; timedatectl status || true
-          fi
-          echo "== uname =="; uname -a
-          echo "== whoami =="; whoami
-      - name: Fetch Actions OIDC JWKS (debug)
-        run: |
-          echo "Fetching JWKS from https://token.actions.githubusercontent.com/.well-known/jwks"
-          curl -sS https://token.actions.githubusercontent.com/.well-known/jwks -o /tmp/jwks.json || true
-          if command -v jq >/dev/null 2>&1; then
-            echo "JWKS keys count:"; jq '.keys | length' /tmp/jwks.json || cat /tmp/jwks.json || true
-          else
-            cat /tmp/jwks.json || true
-          fi
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
