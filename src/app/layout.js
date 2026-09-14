@@ -102,7 +102,7 @@ const SCHEMA_ORG = {
   ],
   sameAs: [
     'https://www.facebook.com/brokenlinksmusic',
-    'https://twitter.com/brokenlinksband',
+    'https://x.com/broken_links',
     'https://www.instagram.com/brokenlinksmusic',
     'https://brokenlinksmusic.bandcamp.com',
     'https://open.spotify.com/artist/broken-links',

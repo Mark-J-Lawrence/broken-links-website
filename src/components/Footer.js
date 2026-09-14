@@ -35,7 +35,7 @@ const NAV_COLS = [
 const SOCIAL = [
   { href: 'https://www.facebook.com/brokenlinksmusic',  label: 'FB' },
   { href: 'https://www.instagram.com/brokenlinksmusic', label: 'IG' },
-  { href: 'http://www.twitter.com/broken_links',   label: 'X' },
+  { href: 'https://x.com/broken_links',            label: 'X' },
   { href: 'https://www.youtube.com/user/brokenlinksmusic/',   label: 'YT' },
   { href: 'https://www.tiktok.com/@brokenlinksmusic',         label: 'TT' },
 ]
