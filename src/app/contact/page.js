@@ -10,12 +10,13 @@ export const metadata = {
 }
 
 const SOCIAL_LINKS = [
-  { label: 'Facebook',  href: 'http://www.facebook.com/brokenlinks' },
+  { label: 'Facebook',  href: 'https://www.facebook.com/brokenlinksmusic' },
   { label: 'Instagram', href: 'https://www.instagram.com/brokenlinksmusic' },
   { label: 'Twitter/X', href: 'http://www.twitter.com/broken_links' },
   { label: 'YouTube',   href: 'https://www.youtube.com/user/brokenlinksmusic/' },
   { label: 'Bandcamp',  href: 'https://brokenlinks.bandcamp.com' },
   { label: 'Spotify',   href: 'https://open.spotify.com/artist/0VBx7ymL8y6CI3TgOFFhTz' },
+  { label: 'TikTok',    href: 'https://www.tiktok.com/@brokenlinksmusic' },
 ]
 
 export default function ContactPage() {

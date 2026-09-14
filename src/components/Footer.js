@@ -33,10 +33,11 @@ const NAV_COLS = [
 ]
 
 const SOCIAL = [
-  { href: 'http://www.facebook.com/brokenlinks',  label: 'FB' },
+  { href: 'https://www.facebook.com/brokenlinksmusic',  label: 'FB' },
   { href: 'https://www.instagram.com/brokenlinksmusic', label: 'IG' },
-  { href: 'http://www.twitter.com/broken_links',   label: 'TW' },
+  { href: 'http://www.twitter.com/broken_links',   label: 'X' },
   { href: 'https://www.youtube.com/user/brokenlinksmusic/',   label: 'YT' },
+  { href: 'https://www.tiktok.com/@brokenlinksmusic',         label: 'TT' },
 ]
 
 export default function Footer() {
