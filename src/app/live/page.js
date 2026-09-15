@@ -30,7 +30,7 @@ const eventSchemas = upcomingAtBuild.map(gig => {
     '@context': 'https://schema.org',
     '@type': 'MusicEvent',
     name: `Broken Links at ${gig.venueName}`,
-    description: gig.notes || `Broken Links live performance at ${gig.venueName} in ${gig.city}, ${gig.country}. Experience high-energy alternative rock music.`,
+    description: gig.notes || `Broken Links live performance at ${gig.venueName} in ${gig.city}, ${gig.country}. Experience high-energy cinematic dark rock music.`,
     startDate: startDateTime,
     endDate: endDateTime,
     eventStatus: gig.status === 'cancelled'

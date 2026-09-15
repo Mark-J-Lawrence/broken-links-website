@@ -3,7 +3,7 @@ import { imgSrc } from '../../lib/basePath'
 
 export const metadata = {
   title: 'About',
-  description: 'Broken Links — alternative rock band from Eastleigh, Hampshire. Blending electronic, rock, and pop with cinematic intensity. Biography, history and band members.',
+  description: 'Broken Links — cinematic dark rock band from Eastleigh, Hampshire. Blending electronic, rock, and pop with cinematic intensity. Biography, history and band members.',
   alternates: {
     canonical: 'https://www.brokenlinksmusic.co.uk/about/',
   },
@@ -69,7 +69,7 @@ export default function AboutPage() {
           <PageTitle
             label="The Band"
             title="About"
-            subtitle="Alternative rock from the UK. Raw sound, honest noise. Est. 2008."
+            subtitle="Cinematic dark rock from the UK. Raw sound, honest noise. Est. 2008."
           />
         </div>
       </section>
@@ -93,7 +93,7 @@ export default function AboutPage() {
                 </p>
                 <p>
                   Mark Lawrence (vocals/guitars), Lewis Betteridge (bass), and Phil Boulter (drums)
-                  create dark, melodic alternative rock driven by electronics, tension, and weight.
+                  create dark, melodic cinematic dark rock driven by electronics, tension, and weight.
                   Brooding guitars lock into mechanical rhythms. Hooks cut through distortion.
                   The atmosphere is dense. The intent is direct.
                 </p>

@@ -301,7 +301,7 @@ function Ticker({ stats }) {
   const TICKER_ITEMS = [
     'New material in progress',
     'Broken Links',
-    'Alternative Rock',
+    'Cinematic Dark Rock',
     'UK',
     'Est. 2008',
     'brokenlinksmusic.co.uk',
@@ -678,7 +678,7 @@ export default function HomeClient({ latestPosts, gigsData = [], allVideos = [],
             </div>
 
             <p className="hero-subtitle" style={{ animation: 'fadeUp 0.9s ease 0.6s both', textAlign: 'center' }}>
-              Alternative Rock · UK · Est. 2008
+              Cinematic Dark Rock · UK · Est. 2008
             </p>
 
             <div className="hero-cta" style={{ animation: 'fadeUp 0.9s ease 0.8s both', justifyContent: 'center' }}>
@@ -757,6 +757,36 @@ export default function HomeClient({ latestPosts, gigsData = [], allVideos = [],
 
       {/* ── NEXT SHOW BANNER ─────────────────────────────────── */}
       <NextShowBanner gig={nextGig} />
+
+      {/* ── FEATURED AUDIO EXPERIENCE ────────────────────────── */}
+      <section className="page-section" style={{ background: 'var(--surface-2)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '40px 0' }}>
+        <div className="container" style={{ maxWidth: '800px' }}>
+          <SectionHeader
+            label="Featured Release"
+            title="Conflict::States"
+            linkHref="/music"
+            linkLabel="View details →"
+          />
+          <div className="reveal" style={{
+            marginTop: '24px',
+            maxWidth: '700px',
+            margin: '24px auto 0 auto',
+            borderRadius: 'var(--radius, 8px)',
+            overflow: 'hidden',
+            boxShadow: '0 12px 40px rgba(0,0,0,0.6)',
+            border: '1px solid rgba(0, 245, 255, 0.15)',
+            background: 'var(--surface)'
+          }}>
+            <iframe
+              style={{ border: 0, width: '100%', height: '120px', display: 'block', background: 'var(--surface)', maxWidth: '700px' }}
+              src="https://bandcamp.com/EmbeddedPlayer/album=2837274392/size=large/bgcol=0d0d14/linkcol=00f5ff/artwork=small/transparent=true/"
+              seamless
+              scrolling="no"
+              title="Conflict::States on Bandcamp"
+            />
+          </div>
+        </div>
+      </section>
 
       {/* ── STATS ────────────────────────────────────────────── */}
       <div className="container">

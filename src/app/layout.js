@@ -8,14 +8,14 @@ const BASE_URL = 'https://www.brokenlinksmusic.co.uk'
 export const metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: 'Broken Links - Alternative Rock Band from Southampton, UK',
+    default: 'Broken Links - Cinematic Dark Rock Band from Southampton, UK',
     template: '%s | Broken Links Band',
   },
-  description: 'Broken Links - Industrial alternative rock band from Southampton, UK. Listen to our albums, watch videos, and find live show dates. Est. 2008.',
+  description: 'Broken Links - Cinematic dark rock band from Southampton, UK. Listen to our albums, watch videos, and find live show dates. Est. 2008.',
   keywords: [
     'Broken Links band',
     'Broken Links music',
-    'alternative rock band',
+    'cinematic dark rock band',
     'industrial rock',
     'Southampton band',
     'UK rock band',
@@ -39,7 +39,7 @@ export const metadata = {
   manifest: '/site.webmanifest',
   openGraph: {
     title: 'Broken Links',
-    description: 'Alternative rock band from Southampton, UK. Blending electronic, rock, and pop with cinematic intensity.',
+    description: 'Cinematic dark rock band from Southampton, UK. Blending electronic, rock, and pop with cinematic intensity.',
     type: 'website',
     url: BASE_URL,
     siteName: 'Broken Links',
@@ -81,8 +81,8 @@ const SCHEMA_ORG = {
   url: BASE_URL,
   logo: 'https://www.brokenlinksmusic.co.uk/android-chrome-512x512.png',
   image: 'https://www.brokenlinksmusic.co.uk/images/uploads/2021/02/Split-4000x2250-1-1024x576.jpg',
-  description: 'Broken Links create dark, melodic alternative rock driven by electronics, tension, and weight. Mark Lawrence (vocals/guitars), Lewis Betteridge (bass), and Phil Boulter (drums) formed in 2008 in Eastleigh, Hampshire. Three EPs, three albums, one remix record. Independent, self-built, always moving forward.',
-  genre: ['Industrial Rock', 'Alternative Rock', 'Post-Rock'],
+  description: 'Broken Links create dark, melodic cinematic dark rock driven by electronics, tension, and weight. Mark Lawrence (vocals/guitars), Lewis Betteridge (bass), and Phil Boulter (drums) formed in 2008 in Eastleigh, Hampshire. Three EPs, three albums, one remix record. Independent, self-built, always moving forward.',
+  genre: ['Cinematic Dark Rock'],
   foundingDate: '2008',
   foundingLocation: {
     '@type': 'Place',

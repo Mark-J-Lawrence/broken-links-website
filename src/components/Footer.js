@@ -43,7 +43,7 @@ export default function Footer() {
               />
             </Link>
             <p className="footer-tagline">
-              Alternative rock from the UK. Blending electronic, rock, and pop with cinematic intensity.
+              Cinematic Dark Rock from the UK. Blending electronic, rock, and pop with cinematic intensity.
             </p>
             <div className="footer-social">
               {SOCIAL_LINKS.map(({ href, label, ariaLabel, icon }) => (
