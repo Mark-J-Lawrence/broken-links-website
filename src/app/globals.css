@@ -832,10 +832,27 @@ main#content {
 @media (max-width: 640px) {
   .hero {
     min-height: 100svh; /* Use small viewport height on mobile */
+    align-items: flex-start;
   }
   
   .hero-content {
-    padding: 40px 0 100px; /* Reduce top padding, increase bottom for scroll indicator */
+    padding: 24px 0 90px; /* Tight top padding; bottom reserved for scroll indicator */
+    width: 100%;
+  }
+
+  /* Reduce logo bottom margin on mobile */
+  .hero-logo-wrap {
+    margin-bottom: 16px !important;
+  }
+
+  /* Tighten subtitle gap so social+subscribe fit above the fold */
+  .hero-subtitle {
+    margin-bottom: 16px;
+  }
+
+  /* Tighten CTA gap */
+  .hero-cta {
+    gap: 10px;
   }
 }
 
@@ -3892,6 +3909,88 @@ img {
   .btn {
     transition-duration: 0.2s;
   }
+}
+
+/* ── Hero social + subscribe strip ──────────────────────────── */
+
+.hero-mobile-social {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.hero-mobile-social__label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.hero-mobile-social__icons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.hero-mobile-social__icons .social-link {
+  width: 44px;
+  height: 44px;
+  font-size: 0.7rem;
+}
+
+.hero-mobile-subscribe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  width: 100%;
+}
+
+.hero-mobile-subscribe__label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.hero-mobile-subscribe__form {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 320px;
+  position: relative;
+}
+
+.hero-mobile-subscribe__input {
+  flex: 1 1 0;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--muted);
+  border-radius: var(--radius);
+  padding: 11px 12px;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.hero-mobile-subscribe__input:focus {
+  border-color: var(--amber);
+  box-shadow: 0 0 8px var(--amber-glow);
+}
+
+.hero-mobile-subscribe__btn {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  padding: 11px 14px;
 }
 
 /* ── Print Styles ────────────────────────────────────────── */
