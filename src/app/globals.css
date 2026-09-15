@@ -1887,9 +1887,13 @@ main#content {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr;
   gap: 48px;
   margin-bottom: 48px;
+}
+
+.footer-grid > div:not(.footer-brand) {
+  text-align: right;
 }
 
 .footer-brand .site-logo {
@@ -1945,6 +1949,11 @@ main#content {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  align-items: flex-start;
+}
+
+.footer-grid > div:not(.footer-brand) .footer-links {
+  align-items: flex-end;
 }
 
 .footer-link {
@@ -1961,8 +1970,16 @@ main#content {
   transition: color var(--transition), transform var(--transition);
   display: inline-block;
 }
+.footer-grid > div:not(.footer-brand) .footer-link {
+  flex-direction: row-reverse;
+}
+.footer-grid > div:not(.footer-brand) .footer-link::before {
+  content: '‹';
+}
 .footer-link:hover { color: var(--text); }
-.footer-link:hover::before { color: var(--amber); transform: translateX(2px); text-shadow: 0 0 4px var(--amber-glow); }
+.footer-link:hover::before { color: var(--amber); text-shadow: 0 0 4px var(--amber-glow); }
+.footer-grid > div:not(.footer-brand) .footer-link:hover::before { transform: translateX(-2px); }
+.footer-grid > .footer-brand .footer-link:hover::before { transform: translateX(2px); }
 
 .footer-bottom {
   border-top: 1px solid var(--border);
@@ -2002,9 +2019,22 @@ main#content {
 @media (max-width: 1024px) {
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
 }
+@media (max-width: 1024px) and (min-width: 641px) {
+  /* Two-column layout: brand spans full width, nav cols side by side */
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .footer-brand { grid-column: 1 / -1; }
+}
+
 @media (max-width: 640px) {
-  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
+
+  /* Revert to left-aligned on mobile */
+  .footer-grid > div:not(.footer-brand) { text-align: left; }
+  .footer-grid > div:not(.footer-brand) .footer-links { align-items: flex-start; }
+  .footer-grid > div:not(.footer-brand) .footer-link { flex-direction: row; }
+  .footer-grid > div:not(.footer-brand) .footer-link::before { content: '›'; }
+  .footer-grid > div:not(.footer-brand) .footer-link:hover::before { transform: translateX(2px); }
 }
 
 /* ── Utility ────────────────────────────────────────────────── */

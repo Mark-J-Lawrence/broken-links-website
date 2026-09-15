@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { imgSrc } from '../lib/basePath'
+import { SOCIAL_LINKS } from '../lib/socialLinks'
 
 const NAV_COLS = [
   {
@@ -21,23 +22,6 @@ const NAV_COLS = [
       { href: '/live/history', label: 'Show History' },
     ],
   },
-  {
-    title: 'Connect',
-    links: [
-      { href: 'https://open.spotify.com/artist/0VBx7ymL8y6CI3TgOFFhTz', label: 'Spotify',     external: true },
-      { href: 'https://music.apple.com/gb/artist/broken-links/305262241',  label: 'Apple Music', external: true },
-      { href: 'https://brokenlinks.bandcamp.com/',     label: 'Bandcamp',    external: true },
-      { href: 'https://www.youtube.com/user/brokenlinksmusic/',      label: 'YouTube',     external: true },
-    ],
-  },
-]
-
-const SOCIAL = [
-  { href: 'https://www.facebook.com/brokenlinksmusic',  label: 'FB' },
-  { href: 'https://www.instagram.com/brokenlinksmusic', label: 'IG' },
-  { href: 'https://x.com/broken_links',            label: 'X' },
-  { href: 'https://www.youtube.com/user/brokenlinksmusic/',   label: 'YT' },
-  { href: 'https://www.tiktok.com/@brokenlinksmusic',         label: 'TT' },
 ]
 
 export default function Footer() {
@@ -62,16 +46,16 @@ export default function Footer() {
               Alternative rock from the UK. Blending electronic, rock, and pop with cinematic intensity.
             </p>
             <div className="footer-social">
-              {SOCIAL.map(({ href, label }) => (
+              {SOCIAL_LINKS.map(({ href, label, ariaLabel, icon }) => (
                 <a
                   key={label}
                   href={href}
                   className="social-link"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={label}
+                  aria-label={ariaLabel}
                 >
-                  {label}
+                  {icon}
                 </a>
               ))}
             </div>
@@ -105,5 +89,3 @@ export default function Footer() {
     </footer>
   )
 }
-
-
