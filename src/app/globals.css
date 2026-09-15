@@ -831,12 +831,14 @@ main#content {
 /* Mobile adjustments for hero */
 @media (max-width: 640px) {
   .hero {
-    min-height: 100svh; /* Use small viewport height on mobile */
-    align-items: flex-start;
+    min-height: 100svh;
+    align-items: center; /* vertically centre the content block */
+    padding-top: 40px;   /* nudge down from the very top */
+    padding-bottom: 80px; /* leave room for scroll indicator */
   }
   
   .hero-content {
-    padding: 24px 0 90px; /* Tight top padding; bottom reserved for scroll indicator */
+    padding: 0;
     width: 100%;
   }
 
@@ -845,7 +847,7 @@ main#content {
     margin-bottom: 16px !important;
   }
 
-  /* Tighten subtitle gap so social+subscribe fit above the fold */
+  /* Tighten subtitle gap */
   .hero-subtitle {
     margin-bottom: 16px;
   }
