@@ -98,7 +98,7 @@ export default async function BlogPostPage({ params }) {
         {post.image && (
           <div className="post-hero-image">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={imgSrc(post.image)} alt={post.title} />
+            <img src={imgSrc(post.image)} alt={`Broken Links — ${post.title}`} />
             <div className="post-hero-image-overlay" />
           </div>
         )}

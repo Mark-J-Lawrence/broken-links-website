@@ -1,12 +1,65 @@
 import PageTitle from '../../components/PageTitle'
 import { imgSrc } from '../../lib/basePath'
 
+const BASE_URL = 'https://www.brokenlinksmusic.co.uk'
+
 export const metadata = {
   title: 'About',
   description: 'Broken Links — cinematic dark rock band from Eastleigh, Hampshire. Blending electronic, rock, and pop with cinematic intensity. Biography, history and band members.',
   alternates: {
-    canonical: 'https://www.brokenlinksmusic.co.uk/about/',
+    canonical: `${BASE_URL}/about/`,
   },
+  openGraph: {
+    title: 'About Broken Links — Cinematic Dark Rock Band',
+    description: 'Meet the members of Broken Links — Mark Lawrence, Lewis Betteridge and Phil Boulter. Dark rock band from Southampton, UK. Est. 2008.',
+    type: 'website',
+    url: `${BASE_URL}/about`,
+    images: [
+      {
+        url: `${BASE_URL}/images/uploads/2021/02/Split-4000x2250-1-1024x576.jpg`,
+        width: 1024,
+        height: 576,
+        alt: 'Broken Links band photo — Mark Lawrence, Lewis Betteridge, Phil Boulter (2021)',
+      },
+    ],
+  },
+}
+
+/* Schema.org ImageObject structured data for the about page images */
+const ABOUT_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ImageObject',
+      contentUrl: `${BASE_URL}/images/uploads/2021/02/Split-4000x2250-1-1024x576.jpg`,
+      name: 'Broken Links — Band Photo 2021',
+      description: 'Broken Links band photo featuring Mark Lawrence, Lewis Betteridge and Phil Boulter. Cinematic dark rock band from Southampton, UK.',
+      creditText: 'Broken Links',
+      width: 1024,
+      height: 576,
+    },
+    {
+      '@type': 'ImageObject',
+      contentUrl: `${BASE_URL}/images/uploads/2014/04/mark-shout-graveyeard.jpg`,
+      name: 'Mark Lawrence — Broken Links (Vocals / Guitar)',
+      description: 'Mark Lawrence, founding member, vocalist and guitarist of Broken Links.',
+      creditText: 'Broken Links',
+    },
+    {
+      '@type': 'ImageObject',
+      contentUrl: `${BASE_URL}/images/uploads/2014/04/lewis-deer-bike-1.jpg`,
+      name: 'Lewis Betteridge — Broken Links (Bass)',
+      description: 'Lewis Betteridge, bassist of Broken Links.',
+      creditText: 'Broken Links',
+    },
+    {
+      '@type': 'ImageObject',
+      contentUrl: `${BASE_URL}/images/uploads/2014/04/phil-subway-1.jpg`,
+      name: 'Phil Boulter — Broken Links (Drums)',
+      description: 'Phil Boulter, drummer of Broken Links.',
+      creditText: 'Broken Links',
+    },
+  ],
 }
 
 const MEMBERS = [
@@ -63,6 +116,12 @@ export default function AboutPage() {
 
   return (
     <>
+      {/* Schema.org ImageObject structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ABOUT_SCHEMA) }}
+      />
+
       {/* ── Page Hero ─────────────────────────────────────────── */}
       <section className="page-hero">
         <div className="container">
@@ -125,7 +184,7 @@ export default function AboutPage() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={bandPhoto}
-                alt="Broken Links band photo"
+                alt="Broken Links band photo — Mark Lawrence, Lewis Betteridge, Phil Boulter (2021)"
                 style={{
                   width: '100%',
                   height: '100%',
@@ -180,7 +239,7 @@ export default function AboutPage() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={imgSrc(member.image)}
-                    alt={member.name}
+                    alt={`${member.name} — Broken Links (${member.role})`}
                     style={{
                       width: '100%',
                       height: '100%',

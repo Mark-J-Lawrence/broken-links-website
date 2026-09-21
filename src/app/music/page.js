@@ -3,12 +3,48 @@ import PageTitle from '../../components/PageTitle'
 import { imgSrc } from '../../lib/basePath'
 import albumsData from '../../data/albums.json'
 
+const BASE_URL = 'https://www.brokenlinksmusic.co.uk'
+
 export const metadata = {
   title: 'Music',
   description: 'Broken Links discography — albums, singles and streaming links.',
   alternates: {
-    canonical: 'https://www.brokenlinksmusic.co.uk/music/',
+    canonical: `${BASE_URL}/music/`,
   },
+  openGraph: {
+    title: 'Music — Broken Links Discography',
+    description: 'Broken Links discography — albums, singles and streaming links. Including Conflict::States (2021), Divide/Restore (2015) and more.',
+    type: 'website',
+    url: `${BASE_URL}/music`,
+    images: [
+      {
+        url: `${BASE_URL}${albumsData[0]?.cover}`,
+        width: 800,
+        height: 800,
+        alt: `Broken Links — ${albumsData[0]?.title} (${albumsData[0]?.year}) — Official Album Cover`,
+      },
+    ],
+  },
+}
+
+/* Schema.org MusicAlbum + ImageObject structured data */
+const MUSIC_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@graph': albumsData.map(album => ({
+    '@type': 'MusicAlbum',
+    name: album.title,
+    byArtist: { '@type': 'MusicGroup', name: 'Broken Links', url: BASE_URL },
+    datePublished: album.year,
+    image: {
+      '@type': 'ImageObject',
+      contentUrl: `${BASE_URL}${album.cover}`,
+      name: `Broken Links — ${album.title} (${album.year}) — Official Album Cover`,
+      description: `Official album cover artwork for ${album.title} by Broken Links.`,
+      creditText: 'Broken Links',
+    },
+    url: album.streaming.spotify,
+    numTracks: album.tracks,
+  })),
 }
 
 const ALBUMS = albumsData
@@ -31,7 +67,7 @@ function AlbumRow({ album, index }) {
         <div className="album-row-art-inner">
           <Image
             src={imgSrc(album.cover)}
-            alt={`${album.title} album cover`}
+            alt={`Broken Links — ${album.title} (${album.year}) — Official Album Cover`}
             width={500}
             height={500}
             style={{ width: '100%', height: 'auto', display: 'block' }}
@@ -96,6 +132,12 @@ function AlbumRow({ album, index }) {
 export default function MusicPage() {
   return (
     <>
+      {/* Schema.org MusicAlbum + ImageObject structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(MUSIC_SCHEMA) }}
+      />
+
       {/* ── Page Hero ─────────────────────────────────────────── */}
       <section className="page-hero">
         <div className="container">

@@ -37,7 +37,7 @@ function PressCard({ post, index }) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={imgSrc(post.image)}
-            alt={post.title}
+            alt={`Broken Links — ${post.title}`}
             loading="lazy"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />

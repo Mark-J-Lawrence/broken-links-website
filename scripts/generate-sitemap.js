@@ -2,113 +2,150 @@
 /**
  * generate-sitemap.js
  * Generates public/sitemap.xml from all static routes + dynamic slugs.
+ *
+ * lastmod dates are derived from real content, not today's date:
+ *   - Blog posts    → frontmatter `date` field
+ *   - Tag pages     → most recent post date for that tag
+ *   - Static routes → git last-commit date for the backing data files
+ *   - Venue pages   → git last-commit date for venues.json
+ *
  * Run: node scripts/generate-sitemap.js
  */
 
-const fs = require('fs')
-const path = require('path')
-const matter = require('gray-matter')
+const fs           = require('fs')
+const path         = require('path')
+const matter       = require('gray-matter')
+const { execSync } = require('child_process')
 
-const BASE_URL = 'https://www.brokenlinksmusic.co.uk'
+const BASE_URL  = 'https://www.brokenlinksmusic.co.uk'
+const POSTS_DIR = path.join(__dirname, '../src/data/blog-posts')
+const ROOT      = path.join(__dirname, '..')
 
-// Static routes with their priorities and change frequencies
+// Static routes — lastmod is driven by the files listed in `watches`
 const STATIC_ROUTES = [
-  { path: '/',            priority: '1.0', changefreq: 'weekly' },
-  { path: '/about',       priority: '0.8', changefreq: 'monthly' },
-  { path: '/music',       priority: '0.9', changefreq: 'monthly' },
-  { path: '/videos',      priority: '0.8', changefreq: 'monthly' },
-  { path: '/live',        priority: '0.8', changefreq: 'weekly' },
-  { path: '/live/history',priority: '0.6', changefreq: 'monthly' },
-  { path: '/photos',      priority: '0.7', changefreq: 'monthly' },
-  { path: '/press',       priority: '0.7', changefreq: 'monthly' },
-  { path: '/contact',     priority: '0.6', changefreq: 'yearly' },
-  { path: '/news',        priority: '0.9', changefreq: 'weekly' },
+  { path: '/',             priority: '1.0', changefreq: 'weekly',  watches: ['src/data/gigs.json', 'src/data/videos.json', 'src/data/photos.json', 'src/data/albums.json'] },
+  { path: '/about',        priority: '0.8', changefreq: 'monthly', watches: ['src/app/about/page.js'] },
+  { path: '/music',        priority: '0.9', changefreq: 'monthly', watches: ['src/data/albums.json', 'src/app/music/page.js'] },
+  { path: '/videos',       priority: '0.8', changefreq: 'monthly', watches: ['src/data/videos.json'] },
+  { path: '/live',         priority: '0.8', changefreq: 'weekly',  watches: ['src/data/gigs.json'] },
+  { path: '/live/history', priority: '0.6', changefreq: 'monthly', watches: ['src/data/gigs.json'] },
+  { path: '/photos',       priority: '0.7', changefreq: 'monthly', watches: ['src/data/photos.json'] },
+  { path: '/press',        priority: '0.7', changefreq: 'monthly', watches: ['src/data/blog-posts'] },
+  { path: '/contact',      priority: '0.6', changefreq: 'yearly',  watches: ['src/app/contact/page.js'] },
+  { path: '/news',         priority: '0.9', changefreq: 'weekly',  watches: ['src/data/blog-posts'] },
 ]
 
-function getBlogSlugs() {
-  const postsDir = path.join(__dirname, '../src/data/blog-posts')
-  if (!fs.existsSync(postsDir)) return []
-  return fs.readdirSync(postsDir)
-    .filter(f => f.endsWith('.mdx'))
-    .map(f => f.replace(/\.mdx$/, ''))
+function formatDate(d) {
+  if (!d) return new Date().toISOString().split('T')[0]
+  const date = d instanceof Date ? d : new Date(d)
+  return isNaN(date) ? new Date().toISOString().split('T')[0] : date.toISOString().split('T')[0]
 }
 
-function getBlogTags() {
-  const postsDir = path.join(__dirname, '../src/data/blog-posts')
-  if (!fs.existsSync(postsDir)) return []
-  const tags = new Set()
-  fs.readdirSync(postsDir)
+/** Returns the git last-commit date for a file or directory, or today if untracked. */
+function gitLastMod(relPath) {
+  try {
+    const result = execSync(
+      `git log -1 --format="%cI" -- "${relPath}"`,
+      { cwd: ROOT, stdio: ['pipe', 'pipe', 'pipe'] }
+    ).toString().trim()
+    return result ? formatDate(new Date(result)) : null
+  } catch {
+    return null
+  }
+}
+
+/** Returns the most recent git date across a list of relative paths. */
+function latestGitDate(relPaths) {
+  const dates = relPaths
+    .map(p => gitLastMod(p))
+    .filter(Boolean)
+    .sort()
+  return dates[dates.length - 1] || formatDate(new Date())
+}
+
+/** Read all MDX posts, returning { slug, date, tags } */
+function readAllPosts() {
+  if (!fs.existsSync(POSTS_DIR)) return []
+  return fs.readdirSync(POSTS_DIR)
     .filter(f => f.endsWith('.mdx'))
-    .forEach(f => {
+    .map(f => {
       try {
-        const content = fs.readFileSync(path.join(postsDir, f), 'utf8')
-        const { data } = matter(content)
-        if (Array.isArray(data.tags)) {
-          data.tags.forEach(t => tags.add(t))
+        const raw = fs.readFileSync(path.join(POSTS_DIR, f), 'utf8')
+        const { data } = matter(raw)
+        return {
+          slug: f.replace(/\.mdx$/, ''),
+          date: data.date ? formatDate(new Date(String(data.date))) : null,
+          tags: Array.isArray(data.tags) ? data.tags : [],
         }
-      } catch {}
+      } catch {
+        return { slug: f.replace(/\.mdx$/, ''), date: null, tags: [] }
+      }
     })
-  return Array.from(tags)
 }
 
 function getVenueSlugs() {
-  const venuesPath = path.join(__dirname, '../src/data/venues.json')
+  const venuesPath = path.join(ROOT, 'src/data/venues.json')
   if (!fs.existsSync(venuesPath)) return []
   try {
-    const venues = JSON.parse(fs.readFileSync(venuesPath, 'utf8'))
-    return venues.map(v => v.slug).filter(Boolean)
+    return JSON.parse(fs.readFileSync(venuesPath, 'utf8')).map(v => v.slug).filter(Boolean)
   } catch { return [] }
 }
 
-function formatDate(d) {
-  return d.toISOString().split('T')[0]
-}
-
 function buildSitemap() {
-  const today = formatDate(new Date())
   const urls = []
+  const posts = readAllPosts()
 
-  // Static routes
+  // ── Static routes ─────────────────────────────────────────────
   for (const route of STATIC_ROUTES) {
+    const lastmod = latestGitDate(route.watches)
     urls.push(`  <url>
     <loc>${BASE_URL}${route.path}</loc>
-    <lastmod>${today}</lastmod>
+    <lastmod>${lastmod}</lastmod>
     <changefreq>${route.changefreq}</changefreq>
     <priority>${route.priority}</priority>
   </url>`)
   }
 
-  // Blog posts
-  const slugs = getBlogSlugs()
-  console.log(`Found ${slugs.length} blog posts`)
-  for (const slug of slugs) {
+  // ── Blog posts — lastmod from frontmatter date ─────────────────
+  console.log(`Found ${posts.length} blog posts`)
+  for (const post of posts) {
+    // Fall back to git date if frontmatter date is missing
+    const lastmod = post.date || gitLastMod(`src/data/blog-posts/${post.slug}.mdx`) || formatDate(new Date())
     urls.push(`  <url>
-    <loc>${BASE_URL}/news/${slug}</loc>
-    <lastmod>${today}</lastmod>
+    <loc>${BASE_URL}/news/${post.slug}</loc>
+    <lastmod>${lastmod}</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>`)
   }
 
-  // Tag pages
-  const tags = getBlogTags()
+  // ── Tag pages — lastmod = most recent post with that tag ───────
+  const tagMap = {}
+  for (const post of posts) {
+    for (const tag of post.tags) {
+      if (!tagMap[tag] || post.date > tagMap[tag]) tagMap[tag] = post.date
+    }
+  }
+  const tags = Object.keys(tagMap).sort()
   console.log(`Found ${tags.length} tags`)
   for (const tag of tags) {
+    const lastmod = tagMap[tag] || formatDate(new Date())
     urls.push(`  <url>
     <loc>${BASE_URL}/news/tag/${encodeURIComponent(tag)}</loc>
-    <lastmod>${today}</lastmod>
+    <lastmod>${lastmod}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>`)
   }
 
-  // Venue pages
+  // ── Venue pages — lastmod from venues.json git date ───────────
   const venueSlugs = getVenueSlugs()
+  const venueLastmod = gitLastMod('src/data/venues.json') || formatDate(new Date())
   console.log(`Found ${venueSlugs.length} venues`)
   for (const slug of venueSlugs) {
     urls.push(`  <url>
     <loc>${BASE_URL}/live/venues/${slug}</loc>
-    <lastmod>${today}</lastmod>
+    <lastmod>${venueLastmod}</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>`)
@@ -119,7 +156,7 @@ function buildSitemap() {
 ${urls.join('\n')}
 </urlset>`
 
-  const outPath = path.join(__dirname, '../public/sitemap.xml')
+  const outPath = path.join(ROOT, 'public/sitemap.xml')
   fs.writeFileSync(outPath, xml, 'utf8')
   console.log(`✓ Sitemap written to public/sitemap.xml (${urls.length} URLs)`)
 }

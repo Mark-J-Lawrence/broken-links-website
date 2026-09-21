@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.brokenlinksmusic.co.uk/sitemap.xml
+Sitemap: https://www.brokenlinksmusic.co.uk/sitemap-images.xml
+Sitemap: https://www.brokenlinksmusic.co.uk/sitemap-videos.xml
