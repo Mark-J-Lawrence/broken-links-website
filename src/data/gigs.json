@@ -2565,5 +2565,22 @@
     "notes": "Performing @ HMV (on stage @ 13:00pm)",
     "tour": "Performing @ HMV (on stage @ 13:00pm)",
     "status": "active"
+  },
+  {
+    "id": 152,
+    "slug": "2026-11-15-the-hobbit",
+    "title": "The Hobbit",
+    "date": "2026-11-15",
+    "time": "19:00",
+    "venueSlug": "the-hobbit",
+    "venueName": "The Hobbit",
+    "city": "Southampton",
+    "country": "UK",
+    "admittance": "All Ages",
+    "price": "Free",
+    "ticketUrl": "",
+    "notes": "Supporting The MEDZ",
+    "tour": "",
+    "status": "active"
   }
 ]
