@@ -34,12 +34,13 @@ function escapeXml(str) {
     .replace(/'/g,  '&apos;')
 }
 
-function imageBlock(loc, caption) {
+function imageBlock(loc, caption, licenseUrl = `${BASE_URL}/contact`) {
   return [
     '    <image:image>',
     `      <image:loc>${escapeXml(BASE_URL + loc)}</image:loc>`,
     `      <image:caption>${escapeXml(caption)}</image:caption>`,
     `      <image:title>${escapeXml(caption)}</image:title>`,
+    `      <image:license>${escapeXml(licenseUrl)}</image:license>`,
     '    </image:image>',
   ].join('\n')
 }

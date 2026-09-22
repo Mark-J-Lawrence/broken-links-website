@@ -112,7 +112,7 @@ const SCHEMA_ORG = {
     name: 'Fatalism (Official Video)',
     description: 'Official music video for Fatalism — taken from the album Conflict::States (2021).',
     thumbnailUrl: 'https://img.youtube.com/vi/Qu9HaA3J0W0/maxresdefault.jpg',
-    uploadDate: '2021-11-05',
+    uploadDate: '2021-11-05T00:00:00+00:00',
     contentUrl: 'https://www.youtube.com/watch?v=Qu9HaA3J0W0',
     embedUrl: 'https://www.youtube.com/embed/Qu9HaA3J0W0',
     duration: 'PT4M15S'

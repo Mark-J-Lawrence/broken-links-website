@@ -41,7 +41,7 @@ for (const video of videosData) {
   lines.push(`      <video:description>${escapeXml(description)}</video:description>`)
   lines.push(`      <video:content_loc>https://www.youtube.com/watch?v=${video.youtubeId}</video:content_loc>`)
   lines.push(`      <video:player_loc>https://www.youtube.com/embed/${video.youtubeId}</video:player_loc>`)
-  lines.push(`      <video:publication_date>${video.date}</video:publication_date>`)
+  lines.push(`      <video:publication_date>${video.date}T00:00:00+00:00</video:publication_date>`)
   lines.push(`      <video:category>${escapeXml(video.category)}</video:category>`)
   lines.push(`      <video:tag>Broken Links</video:tag>`)
   lines.push(`      <video:tag>dark rock</video:tag>`)

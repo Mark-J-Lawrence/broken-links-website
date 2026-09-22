@@ -33,7 +33,7 @@ const videoSchemas = videosData.map((v) => ({
     `https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg`,
     `https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg`,
   ],
-  uploadDate: v.date,
+  uploadDate: `${v.date}T00:00:00+00:00`,
   contentUrl: `https://www.youtube.com/watch?v=${v.youtubeId}`,
   embedUrl: `https://www.youtube.com/embed/${v.youtubeId}`,
   publisher: {
