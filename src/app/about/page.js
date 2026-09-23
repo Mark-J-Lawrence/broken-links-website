@@ -39,7 +39,7 @@ const ABOUT_SCHEMA = {
       license: `${BASE_URL}/about`,
       acquireLicensePage: `${BASE_URL}/contact`,
       creator: {
-        '@type': 'MusicGroup',
+        '@type': 'Organization',
         name: 'Broken Links',
         url: BASE_URL,
       },
@@ -56,7 +56,7 @@ const ABOUT_SCHEMA = {
       license: `${BASE_URL}/about`,
       acquireLicensePage: `${BASE_URL}/contact`,
       creator: {
-        '@type': 'MusicGroup',
+        '@type': 'Organization',
         name: 'Broken Links',
         url: BASE_URL,
       },
@@ -71,7 +71,7 @@ const ABOUT_SCHEMA = {
       license: `${BASE_URL}/about`,
       acquireLicensePage: `${BASE_URL}/contact`,
       creator: {
-        '@type': 'MusicGroup',
+        '@type': 'Organization',
         name: 'Broken Links',
         url: BASE_URL,
       },
@@ -86,7 +86,7 @@ const ABOUT_SCHEMA = {
       license: `${BASE_URL}/about`,
       acquireLicensePage: `${BASE_URL}/contact`,
       creator: {
-        '@type': 'MusicGroup',
+        '@type': 'Organization',
         name: 'Broken Links',
         url: BASE_URL,
       },

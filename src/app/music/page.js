@@ -45,7 +45,7 @@ const MUSIC_SCHEMA = {
       license: `${BASE_URL}/music`,
       acquireLicensePage: `${BASE_URL}/contact`,
       creator: {
-        '@type': 'MusicGroup',
+        '@type': 'Organization',
         name: 'Broken Links',
         url: BASE_URL,
       },
