@@ -99,7 +99,7 @@ function buildSitemap() {
   for (const route of STATIC_ROUTES) {
     const lastmod = latestGitDate(route.watches)
     urls.push(`  <url>
-    <loc>${BASE_URL}${route.path}</loc>
+    <loc>${BASE_URL}${route.path === '/' ? '/' : route.path + '/'}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${route.changefreq}</changefreq>
     <priority>${route.priority}</priority>
@@ -112,7 +112,7 @@ function buildSitemap() {
     // Fall back to git date if frontmatter date is missing
     const lastmod = post.date || gitLastMod(`src/data/blog-posts/${post.slug}.mdx`) || formatDate(new Date())
     urls.push(`  <url>
-    <loc>${BASE_URL}/news/${post.slug}</loc>
+    <loc>${BASE_URL}/news/${post.slug}/</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
@@ -131,7 +131,7 @@ function buildSitemap() {
   for (const tag of tags) {
     const lastmod = tagMap[tag] || formatDate(new Date())
     urls.push(`  <url>
-    <loc>${BASE_URL}/news/tag/${encodeURIComponent(tag)}</loc>
+    <loc>${BASE_URL}/news/tag/${encodeURIComponent(tag)}/</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -144,7 +144,7 @@ function buildSitemap() {
   console.log(`Found ${venueSlugs.length} venues`)
   for (const slug of venueSlugs) {
     urls.push(`  <url>
-    <loc>${BASE_URL}/live/venues/${slug}</loc>
+    <loc>${BASE_URL}/live/venues/${slug}/</loc>
     <lastmod>${venueLastmod}</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>

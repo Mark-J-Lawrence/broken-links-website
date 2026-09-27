@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/music</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/music/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2022/03/konflix-1.jpg</image:loc>
       <image:caption>Broken Links — Konflix::Statez (2022) — Official Album Cover</image:caption>
@@ -31,7 +31,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/about</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/about/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/02/Split-4000x2250-1-1024x576.jpg</image:loc>
       <image:caption>Broken Links — Band Photo 2021 — Mark Lawrence, Lewis Betteridge, Phil Boulter</image:caption>
@@ -59,7 +59,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/photos</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/photos/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2026/09/74.JPG</image:loc>
       <image:caption>Broken Links — Live @ Music in the City, Southampton – 12/09/2026 — Music in the City – 74</image:caption>
@@ -5577,7 +5577,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/2nd-album-divide-restore-released-today</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/2nd-album-divide-restore-released-today/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/06/divide-restore-cover.jpg</image:loc>
       <image:caption>Broken Links — 2nd Album &apos;Divide / Restore&apos; released TODAY!!!</image:caption>
@@ -5587,7 +5587,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/album-3-announcement</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/album-3-announcement/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/02/album-featured-news.jpg</image:loc>
       <image:caption>Broken Links — Album #3 &amp; Single Announcement!</image:caption>
@@ -5609,7 +5609,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/album-of-the-year-conflictstates-review-03-07-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/album-of-the-year-conflictstates-review-03-07-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/07/aoty.png</image:loc>
       <image:caption>Broken Links — Album of the Year - &apos;Conflict::States&apos; Review - 03/07/2021</image:caption>
@@ -5619,7 +5619,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/altcorner-interview-22-03-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/altcorner-interview-22-03-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/03/Screenshot-2021-03-22-at-16.56.23.png</image:loc>
       <image:caption>Broken Links — AltCorner - Interview - 22/03/2021</image:caption>
@@ -5629,7 +5629,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/amazing-radio-audition-winners-for-a-2nd-time</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/amazing-radio-audition-winners-for-a-2nd-time/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/06/Screenshot-2021-06-07-at-16.34.08.png</image:loc>
       <image:caption>Broken Links — Amazing Radio Audition Winners, for a 2nd time!</image:caption>
@@ -5645,7 +5645,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/amazing-radios-audition-winners</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/amazing-radios-audition-winners/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/05/Screenshot-2021-05-05-at-12.52.20.png</image:loc>
       <image:caption>Broken Links — Amazing Radio Audition Winners!</image:caption>
@@ -5661,7 +5661,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/announcements-coming</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/announcements-coming/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/02/Split-4000x2250-1-scaled.jpg</image:loc>
       <image:caption>Broken Links — The Wait is Over.</image:caption>
@@ -5671,7 +5671,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/artwork-interview-breathing-the-core-01-11-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/artwork-interview-breathing-the-core-01-11-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/11/breathingFatalismArt.png</image:loc>
       <image:caption>Broken Links — Artwork Interview - Breathing the Core - 01/11/2021</image:caption>
@@ -5681,7 +5681,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/barstool-music-in-conversation-23-04-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/barstool-music-in-conversation-23-04-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/04/New_Coveras01v-1.png</image:loc>
       <image:caption>Broken Links — Barstool Music UK – In Conversation – 23/04/2021</image:caption>
@@ -5691,7 +5691,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/battle-helm-review-of-disasters-ways-to-leave-a-scene-18112012</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/battle-helm-review-of-disasters-ways-to-leave-a-scene-18112012/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2012/12/grumpy-rocker-disasters-review.jpg</image:loc>
       <image:caption>Broken Links — Battle Helm- Review of ‘Disasters: Ways To Leave a Scene’ – 18/11/2012</image:caption>
@@ -5701,7 +5701,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/breathing-the-core-interview-06-03-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/breathing-the-core-interview-06-03-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/03/btc.png</image:loc>
       <image:caption>Broken Links — Breathing the Core - Interview - 06/03/2021</image:caption>
@@ -5711,7 +5711,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/conflictstates-is-out-now</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/conflictstates-is-out-now/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/02/Broken-Links-Conflict-States-1600x1600-1.jpg</image:loc>
       <image:caption>Broken Links — &apos;Conflict::States&apos; is OUT NOW!!!</image:caption>
@@ -5721,7 +5721,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/daily-echo-article-12th-august-2011</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/daily-echo-article-12th-august-2011/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/07/dailyecho12Aug.jpg</image:loc>
       <image:caption>Broken Links — Daily Echo Article – 12th August 2011 — dailyecho12Aug</image:caption>
@@ -5731,7 +5731,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/daily-echo-article-23rd-february-2009</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/daily-echo-article-23rd-february-2009/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/07/scan0001-2-1024x564.jpg</image:loc>
       <image:caption>Broken Links — Daily Echo Article – 23rd February 2009 — scan0001-2</image:caption>
@@ -5741,7 +5741,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/daily-echo-article-23rd-november-2009</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/daily-echo-article-23rd-november-2009/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/07/scan0011.jpg</image:loc>
       <image:caption>Broken Links — Daily Echo Article – 23rd November 2009 — scan0011</image:caption>
@@ -5751,7 +5751,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/daily-echo-article-24th-april-2009</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/daily-echo-article-24th-april-2009/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/07/scan0003-1024x495.jpg</image:loc>
       <image:caption>Broken Links — Daily Echo Article – 24th April 2009 — scan0003</image:caption>
@@ -5761,7 +5761,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/daily-echo-article-28th-august-2009</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/daily-echo-article-28th-august-2009/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/07/scan0010.jpg</image:loc>
       <image:caption>Broken Links — Daily Echo Article – 28th August 2009 — scan0010</image:caption>
@@ -5771,7 +5771,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/dead-embers-videoshoot-day-one-photos</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/dead-embers-videoshoot-day-one-photos/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/04/dead-embers-video-day-1.jpg</image:loc>
       <image:caption>Broken Links — Behind the Scenes: Dead Embers Music Video!</image:caption>
@@ -5811,7 +5811,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/debut-album-now-released</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/debut-album-now-released/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2012/12/disasters-release.jpg</image:loc>
       <image:caption>Broken Links — Debut Album &apos;Disasters: Ways to Leave a Scene&apos; is Out Now!</image:caption>
@@ -5821,7 +5821,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/eras-to-be-played-on-bbc-introducing-tonight</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/eras-to-be-played-on-bbc-introducing-tonight/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/08/BL-introducing.png</image:loc>
       <image:caption>Broken Links — ERAS to be played on BBC Introducing TONIGHT!</image:caption>
@@ -5837,7 +5837,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/erb-magazine-conflictstates-review-30-04-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/erb-magazine-conflictstates-review-30-04-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/04/erbconflictreview-scaled.jpg</image:loc>
       <image:caption>Broken Links — Emerging Rock Bands Magazine - &apos;Conflict::States&apos; Review - 15/04/2021</image:caption>
@@ -5853,7 +5853,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/ever-metal-conflictstates-review-12-08-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/ever-metal-conflictstates-review-12-08-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/08/ever-metal.png</image:loc>
       <image:caption>Broken Links — Ever Metal – ‘Conflict::States’ Review – 12/08/2021</image:caption>
@@ -5863,7 +5863,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/feature-plastic-mag-02-05-2022</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/feature-plastic-mag-02-05-2022/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2022/05/plastic.png</image:loc>
       <image:caption>Broken Links — Feature - Plastic Mag - 02/05/2022</image:caption>
@@ -5873,7 +5873,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/featured-in-the-sun-football-stats-show-for-the-record</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/featured-in-the-sun-football-stats-show-for-the-record/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2013/10/sun-goals-for-the-record.jpg</image:loc>
       <image:caption>Broken Links — &apos;Within Isolation&apos; gets featured in &apos;The Sun&apos; football stats show, &apos;For The Record&apos;!</image:caption>
@@ -5883,7 +5883,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/female-first-review-of-disasters-ways-to-leave-a-scene-21112012</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/female-first-review-of-disasters-ways-to-leave-a-scene-21112012/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2012/11/female-first-disasters-review.jpg</image:loc>
       <image:caption>Broken Links — Female First- Review of ‘Disasters: Ways To Leave a Scene’ – 21/11/2012</image:caption>
@@ -5893,7 +5893,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/final-single-from-conflictstates-released-on-5th-november-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/final-single-from-conflictstates-released-on-5th-november-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/10/246417991_266271635504163_7948173494920566904_n.jpg</image:loc>
       <image:caption>Broken Links — Final single from CONFLICT::STATES released on 5th November 2021</image:caption>
@@ -5909,7 +5909,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/freak-pioneers-review-12-03-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/freak-pioneers-review-12-03-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/03/Screenshot-2021-03-12-at-14.25.35-2.png</image:loc>
       <image:caption>Broken Links — Freak - &apos;Pioneers&apos; Review - 12/03/2021</image:caption>
@@ -5919,7 +5919,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/gee-force</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/gee-force/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/04/14102326_1149289155109737_1858829062474788186_n.jpg</image:loc>
       <image:caption>Broken Links — Gee-Force – ‘Conflict::States’ Review – 10/04/2021</image:caption>
@@ -5929,7 +5929,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/gig-review-rock-regeneration-14-07-2022</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/gig-review-rock-regeneration-14-07-2022/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2022/07/Screenshot-2022-07-20-at-13.50.06-2.png</image:loc>
       <image:caption>Broken Links — Gig Review - Rock Regeneration - 14/07/2022</image:caption>
@@ -5939,7 +5939,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/grumpy-rocker-review-of-disasters-ways-to-leave-a-scene-02122012</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/grumpy-rocker-review-of-disasters-ways-to-leave-a-scene-02122012/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2012/12/grumpy-rocker-disasters-review.jpg</image:loc>
       <image:caption>Broken Links — Grumpy Rocker- Review of ‘Disasters: Ways To Leave a Scene’ – 02/12/2012</image:caption>
@@ -5949,7 +5949,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/hampshire-chronicle-preview-of-prototypescauseeffect-ep-at-launch-gig-5th-may-2011</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/hampshire-chronicle-preview-of-prototypescauseeffect-ep-at-launch-gig-5th-may-2011/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/07/echo-prototypes-clipping.jpg</image:loc>
       <image:caption>Broken Links — Hampshire Chronicle - Preview of ‘Prototypes::Cause+Effect’ EP at Launch Gig – 5th May 2011 — echo-prototypes-clipping</image:caption>
@@ -5959,7 +5959,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/hampshire-chronicle-review-of-gig-at-the-talking-heads-southampton-26th-february-2009</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/hampshire-chronicle-review-of-gig-at-the-talking-heads-southampton-26th-february-2009/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/07/scan0002.jpg</image:loc>
       <image:caption>Broken Links — Hampshire Chronicle Review of Gig at The Talking Heads, Southampton – 26th February 2009 — scan0002</image:caption>
@@ -5969,7 +5969,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/headline-act-moshville-times-16-11-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/headline-act-moshville-times-16-11-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/11/moish.png</image:loc>
       <image:caption>Broken Links — Headline Act - Moshville Times - 16/11/2021</image:caption>
@@ -5979,7 +5979,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/kerrang-tv-playing-our-music-video</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/kerrang-tv-playing-our-music-video/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2012/12/within-isolation-kerrang-tv.jpg</image:loc>
       <image:caption>Broken Links — Within Isolation playing on Kerrang TV!</image:caption>
@@ -5995,7 +5995,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/konflixstatez-is-out-now</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/konflixstatez-is-out-now/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2022/03/konflix-2.jpg</image:loc>
       <image:caption>Broken Links — KONFLIX::STATEZ is OUT NOW!</image:caption>
@@ -6011,7 +6011,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/konflixstatez-review-rock-era-magazine-08-04-2022</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/konflixstatez-review-rock-era-magazine-08-04-2022/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2022/04/rockera.png</image:loc>
       <image:caption>Broken Links — Konflix::Statez Review - Rock Era Magazine - 08/04/2022</image:caption>
@@ -6021,7 +6021,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/konflixstatez-review-sinusoidal-music-25-03-2022</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/konflixstatez-review-sinusoidal-music-25-03-2022/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2022/03/Screenshot-2022-03-31-at-11.37.07-2.png</image:loc>
       <image:caption>Broken Links — Konflix::Statez Review - Sinusoidal Music - 25/03/2022</image:caption>
@@ -6031,7 +6031,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/music-in-the-city-september-2026</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/music-in-the-city-september-2026/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2026/09/120.JPG</image:loc>
       <image:caption>Broken Links — Music in the City – Southampton, 12th September 2026</image:caption>
@@ -6083,7 +6083,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/music-matters-conflictstates-review-30-04-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/music-matters-conflictstates-review-30-04-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/04/Screenshot-2021-04-30-at-14.10.20-2.png</image:loc>
       <image:caption>Broken Links — Music Matters - &apos;Conflict::States&apos; Review - 30/04/2021</image:caption>
@@ -6093,7 +6093,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-promo-photos-3</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-promo-photos-3/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2015/04/IMG_4916_4.jpg</image:loc>
       <image:caption>Broken Links — New Promo Photos!!</image:caption>
@@ -6103,7 +6103,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-promo-photos</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-promo-photos/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2009/11/M9T6780-300x200.jpg</image:loc>
       <image:caption>Broken Links — New Promo Photos!!! — Broken Links - Corner 1</image:caption>
@@ -6119,7 +6119,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-single-announcement</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-single-announcement/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/03/Replicas-cover-Image-1-1.jpg</image:loc>
       <image:caption>Broken Links — New Single Announcement</image:caption>
@@ -6141,7 +6141,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-single-replicas-is-out-now</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-single-replicas-is-out-now/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/03/Replicas-cover-Image-1-1.jpg</image:loc>
       <image:caption>Broken Links — New single ‘Replicas’ is out NOW!</image:caption>
@@ -6151,7 +6151,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-song-and-album-annoucement</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-song-and-album-annoucement/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/06/divide-restore-cover.jpg</image:loc>
       <image:caption>Broken Links — New Song and Second Album Announcement!</image:caption>
@@ -6161,7 +6161,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-song-released-featured-in-movie-zombie-resurrection</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-song-released-featured-in-movie-zombie-resurrection/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/08/Zombie-Resurrection-Poster.jpg</image:loc>
       <image:caption>Broken Links — New Song Released! As Featured in Movie &apos;Zombie Resurrection&apos;!</image:caption>
@@ -6171,7 +6171,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-song-released-ill-run-away</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-song-released-ill-run-away/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/09/run-away.jpg</image:loc>
       <image:caption>Broken Links — New Song Released! I&apos;ll Run Away!!!!</image:caption>
@@ -6181,7 +6181,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-song-released-submission</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-song-released-submission/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/10/submission.jpg</image:loc>
       <image:caption>Broken Links — New Song Released! Submission!!!!</image:caption>
@@ -6191,7 +6191,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-song-released-the-sickness-in-your-eyes</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-song-released-the-sickness-in-your-eyes/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2015/02/Untitled.png</image:loc>
       <image:caption>Broken Links — New Song Released! The Sickness In Your Eyes!!!!</image:caption>
@@ -6201,7 +6201,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-song-released-transientfourth-planet</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-song-released-transientfourth-planet/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/11/trans.jpg</image:loc>
       <image:caption>Broken Links — New Song Released! Transient/Fourth Planet!!!!</image:caption>
@@ -6211,7 +6211,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-song-released-unnatural</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-song-released-unnatural/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2015/01/unnay.jpg</image:loc>
       <image:caption>Broken Links — New Song Released! Unnatural!!!!</image:caption>
@@ -6221,7 +6221,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-song-released-what-you-want</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-song-released-what-you-want/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/12/want.jpg</image:loc>
       <image:caption>Broken Links — New Song Released! What You Want!!!!</image:caption>
@@ -6231,7 +6231,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-video-for-antibiolotics-out-now</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-video-for-antibiolotics-out-now/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/08/vlcsnap-2021-08-31-00h18m32s830.png</image:loc>
       <image:caption>Broken Links — New video for ANTIBIOLOTICS out NOW!</image:caption>
@@ -6241,7 +6241,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-video-for-cold-war-out-this-friday</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-video-for-cold-war-out-this-friday/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/05/vlcsnap-2021-05-18-18h42m56s460.png</image:loc>
       <image:caption>Broken Links — New Video for &apos;Cold War&apos; out NOW!</image:caption>
@@ -6251,7 +6251,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-video-for-dead-embers</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-video-for-dead-embers/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/07/dead-embers-video1.jpg</image:loc>
       <image:caption>Broken Links — New Video for &apos;Dead Embers&apos; Out Now!</image:caption>
@@ -6261,7 +6261,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-video-for-monolith-out-now</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-video-for-monolith-out-now/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/08/vlcsnap-2021-08-13-13h54m29s287.png</image:loc>
       <image:caption>Broken Links — New video for MONOLITH out NOW!</image:caption>
@@ -6271,7 +6271,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-video-for-t-t-o-is-out-now</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-video-for-t-t-o-is-out-now/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/07/vlcsnap-2021-07-23-10h08m36s716.png</image:loc>
       <image:caption>Broken Links — New video for T.T.O. is out NOW!</image:caption>
@@ -6281,7 +6281,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-video-for-the-bounty-hunter-out-now</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-video-for-the-bounty-hunter-out-now/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2015/06/The-Bounty-Hunter-0-02-34-07.jpg</image:loc>
       <image:caption>Broken Links — New Video for ‘The Bounty Hunter’ Out Now!</image:caption>
@@ -6291,7 +6291,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-video-for-the-day-called-x-is-out-now</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-video-for-the-day-called-x-is-out-now/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/06/vlcsnap-2021-06-18-10h25m41s221.png</image:loc>
       <image:caption>Broken Links — New video for THE DAY CALLED X is out NOW!</image:caption>
@@ -6301,7 +6301,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/new-video-for-year-xi-out-now</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/new-video-for-year-xi-out-now/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/10/vlcsnap-2021-10-08-11h56m15s095.png</image:loc>
       <image:caption>Broken Links — New Video for YEAR XI out NOW!</image:caption>
@@ -6311,7 +6311,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/noizz-webzine-review-of-disasters-ways-to-leave-a-scene-02122012</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/noizz-webzine-review-of-disasters-ways-to-leave-a-scene-02122012/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2012/12/noizze-disasters-review.jpg</image:loc>
       <image:caption>Broken Links — NOIZZ Webzine- Review of ‘Disasters: Ways To Leave a Scene’ – 02/12/2012</image:caption>
@@ -6321,7 +6321,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/petes-rock-news-views-interview-09-03-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/petes-rock-news-views-interview-09-03-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/03/petes.png</image:loc>
       <image:caption>Broken Links — Pete&apos;s Rock News &amp; Views - Interview - 09/03/2021</image:caption>
@@ -6331,7 +6331,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/pioneers-is-out-now</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/pioneers-is-out-now/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/02/pioneers.png</image:loc>
       <image:caption>Broken Links — New single &apos;Pioneers&apos; is out NOW!</image:caption>
@@ -6341,7 +6341,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/powerplay-magazine-conflictstates-review-22-03-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/powerplay-magazine-conflictstates-review-22-03-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/04/Broken-Links-PP-Review.jpg</image:loc>
       <image:caption>Broken Links — Powerplay Magazine - &apos;Conflict::States&apos; Review - 22/03/2021</image:caption>
@@ -6357,7 +6357,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/powerplay-magazine-review-of-disasters-ways-to-leave-a-scene-122012</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/powerplay-magazine-review-of-disasters-ways-to-leave-a-scene-122012/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2012/12/powerplay-clipping.jpg</image:loc>
       <image:caption>Broken Links — Powerplay Magazine - Review of ‘Disasters: Ways To Leave a Scene’</image:caption>
@@ -6373,7 +6373,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/pre-order-the-new-album-now</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/pre-order-the-new-album-now/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/02/Broken-Links-Conflict-States-1600x1600-1.jpg</image:loc>
       <image:caption>Broken Links — Pre-order the new album NOW!</image:caption>
@@ -6383,7 +6383,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/prepare-for-a-new-era</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/prepare-for-a-new-era/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/03/preapre-for-new-era-280.jpg</image:loc>
       <image:caption>Broken Links — Prepare for the new era!</image:caption>
@@ -6399,7 +6399,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/punk-prospect-live-review-the-rattlesnake-london-21112012</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/punk-prospect-live-review-the-rattlesnake-london-21112012/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2012/12/live-rattlesnake-25-11-12.jpg</image:loc>
       <image:caption>Broken Links — Punk Prospect – Live Review @ The Rattlesnake, London 21/11/2012</image:caption>
@@ -6409,7 +6409,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/punk-prospect-review-of-disasters-ways-to-leave-a-scene-25112012</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/punk-prospect-review-of-disasters-ways-to-leave-a-scene-25112012/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2012/11/disasters-cover.jpg</image:loc>
       <image:caption>Broken Links — Punk Prospect- Review of ‘Disasters: Ways To Leave a Scene’ – 25/11/2012</image:caption>
@@ -6419,7 +6419,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/remix-album-announcement</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/remix-album-announcement/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2022/03/konflix.jpg</image:loc>
       <image:caption>Broken Links — Remix Album Announcement</image:caption>
@@ -6435,7 +6435,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/rock-lifestyle-uk-conflictstates-review-07-05-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/rock-lifestyle-uk-conflictstates-review-07-05-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/05/Screenshot-2021-05-07-at-17.25.51.png</image:loc>
       <image:caption>Broken Links — Rock Lifestyle UK - &apos;Conflict::States&apos; Review - 07/05/2021</image:caption>
@@ -6445,7 +6445,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/rock-n-load-conflictstates-review-29-04-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/rock-n-load-conflictstates-review-29-04-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/02/rock-n-load.jpg</image:loc>
       <image:caption>Broken Links — Rock &apos;N Load - &apos;Conflict::States&apos; Review - 29/04/2021</image:caption>
@@ -6455,7 +6455,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/rock-n-load-interview</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/rock-n-load-interview/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/02/rock-n-load.jpg</image:loc>
       <image:caption>Broken Links — Rock &apos;N Load - Interview - 25/02/2021</image:caption>
@@ -6465,7 +6465,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/rock-regeneration-album-review-06-04-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/rock-regeneration-album-review-06-04-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/04/rock-regen.png</image:loc>
       <image:caption>Broken Links — Rock Regeneration - &apos;Conflict::States&apos; Review - 06/04/2021</image:caption>
@@ -6475,7 +6475,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/rock-regeneration-review-of-disasters-ways-to-leave-a-scene-04122012</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/rock-regeneration-review-of-disasters-ways-to-leave-a-scene-04122012/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2012/12/rock-regeneration-disasters-review.jpg</image:loc>
       <image:caption>Broken Links — Rock Regeneration - Review of ‘Disasters: Ways To Leave a Scene’ – 04/12/2012</image:caption>
@@ -6485,7 +6485,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/rock-regeneration-review-of-dividerestore-06012015</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/rock-regeneration-review-of-dividerestore-06012015/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2015/01/regen.jpg</image:loc>
       <image:caption>Broken Links — Rock Regeneration – Review of ‘Divide/Restore’ – 06/01/2015</image:caption>
@@ -6495,7 +6495,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/rock-sound-review-of-disasters-ways-to-leave-a-scene-07112012</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/rock-sound-review-of-disasters-ways-to-leave-a-scene-07112012/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2012/11/rocksound-disaters-review-702x1024.jpg</image:loc>
       <image:caption>Broken Links — Rock Sound- Review of ‘Disasters: Ways To Leave a Scene’ – 07/11/2012 — rocksound-disaters-review</image:caption>
@@ -6505,7 +6505,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/rocknbold-conflictstates-review-01-05-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/rocknbold-conflictstates-review-01-05-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/05/logo-preta-1.png</image:loc>
       <image:caption>Broken Links — Rocknbold - &apos;Conflict::States&apos; Review - 01/05/2021</image:caption>
@@ -6515,7 +6515,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/shell-shocked-radio-interview-12-08-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/shell-shocked-radio-interview-12-08-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/08/shellshocked.png</image:loc>
       <image:caption>Broken Links — Shell Shocked Radio - Interview - 12/08/2021</image:caption>
@@ -6525,7 +6525,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/stereo-six-v13-20-11-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/stereo-six-v13-20-11-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/11/v13-mag.png</image:loc>
       <image:caption>Broken Links — Interview - V13 - 20/11/2021</image:caption>
@@ -6535,7 +6535,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/tempelores-magazine-review-of-disasters-ways-to-leave-a-scene-19112012</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/tempelores-magazine-review-of-disasters-ways-to-leave-a-scene-19112012/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2012/11/tempelores-disasters-review.jpg</image:loc>
       <image:caption>Broken Links — Tempelores Magazine- Review of ‘Disasters: Ways To Leave a Scene’ – 19/11/2012</image:caption>
@@ -6545,7 +6545,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/the-moshville-times-track-by-track-conflictstates-27-04-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/the-moshville-times-track-by-track-conflictstates-27-04-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/04/moshville.png</image:loc>
       <image:caption>Broken Links — The Moshville Times - Track by Track &apos;Conflict::States&apos; - 27/04/2021</image:caption>
@@ -6555,7 +6555,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/the-news-portsmouth-article-24th-april-2009</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/the-news-portsmouth-article-24th-april-2009/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/07/scan00041-1024x712.jpg</image:loc>
       <image:caption>Broken Links — The News (Portsmouth) Article – 24th April 2009 — scan00041</image:caption>
@@ -6565,7 +6565,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/the-other-side-reviews-interview-11-05-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/the-other-side-reviews-interview-11-05-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/05/Screenshot-2021-05-11-at-14.53.28.png</image:loc>
       <image:caption>Broken Links — The Other Side Reviews - Interview - 11/05/2021</image:caption>
@@ -6575,7 +6575,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/the-real-rob-taylor-interview-05-03-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/the-real-rob-taylor-interview-05-03-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/03/rob-taylor-1.png</image:loc>
       <image:caption>Broken Links — The Real Rob Taylor - In Conversation - 05/03/2021</image:caption>
@@ -6585,7 +6585,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/the-ringmaster-review-conflictstates-review-28-04-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/the-ringmaster-review-conflictstates-review-28-04-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/04/ringmaster.png</image:loc>
       <image:caption>Broken Links — The RingMaster Review - &apos;Conflict::States&apos; review - 28/04/2021</image:caption>
@@ -6595,7 +6595,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/the-rock-metal-podcast-video-interview-04-06-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/the-rock-metal-podcast-video-interview-04-06-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/06/Screenshot-2021-06-08-at-14.50.26.png</image:loc>
       <image:caption>Broken Links — &apos;The Rock Metal Podcast&apos; - Video Interview - 04/06/2021</image:caption>
@@ -6605,7 +6605,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/thoughts-words-action-conflictstates-review-25-04-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/thoughts-words-action-conflictstates-review-25-04-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/04/twa.jpg</image:loc>
       <image:caption>Broken Links — Thoughts Words Action - &apos;Conflict::States&apos; Review - 25/04/2021</image:caption>
@@ -6615,7 +6615,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/uber-rock-video-of-the-week-18-04-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/uber-rock-video-of-the-week-18-04-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/04/uberrockrep.png</image:loc>
       <image:caption>Broken Links — Uber Rock - Video of the Week - 18/04/2021</image:caption>
@@ -6625,7 +6625,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/valkyrian-music-review-of-disasters-ways-to-leave-a-scene-18112012</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/valkyrian-music-review-of-disasters-ways-to-leave-a-scene-18112012/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2012/11/valkyrian-disasters-review.jpg</image:loc>
       <image:caption>Broken Links — Valkyrian Music - Review of ‘Disasters: Ways To Leave a Scene’ – 18/11/2012</image:caption>
@@ -6635,7 +6635,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/vents-interview-02-03-2021</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/vents-interview-02-03-2021/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/03/vents-e1614683977536.png</image:loc>
       <image:caption>Broken Links — VENTS - Interview - 02/03/2021</image:caption>
@@ -6645,7 +6645,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/video-for-fatalism-out-now</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/video-for-fatalism-out-now/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/11/vlcsnap-2021-11-05-10h00m14s038.png</image:loc>
       <image:caption>Broken Links — Video for FATALISM out NOW!</image:caption>
@@ -6655,7 +6655,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/were-back</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/were-back/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2021/10/51572270392_beb407a739_o.jpg</image:loc>
       <image:caption>Broken Links — It&apos;s 2025 and WE ARE BACK!!</image:caption>
@@ -6665,7 +6665,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/were-going-dark-to-make-our-3rd-album</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/were-going-dark-to-make-our-3rd-album/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2014/07/bg-image-1920x1080.jpg</image:loc>
       <image:caption>Broken Links — We&apos;re going dark to make our 3rd album!!</image:caption>
@@ -6675,7 +6675,7 @@
   </url>
 
   <url>
-    <loc>https://www.brokenlinksmusic.co.uk/news/working-on-new-album-for-2013</loc>
+    <loc>https://www.brokenlinksmusic.co.uk/news/working-on-new-album-for-2013/</loc>
     <image:image>
       <image:loc>https://www.brokenlinksmusic.co.uk/images/uploads/2013/02/album-winter-2013.jpg</image:loc>
       <image:caption>Broken Links — Working on new album for Winter 2013!</image:caption>

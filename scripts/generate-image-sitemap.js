@@ -47,9 +47,10 @@ function imageBlock(loc, caption, licenseUrl = `${BASE_URL}/contact`) {
 
 function urlBlock(loc, images) {
   if (!images.length) return ''
+  const trailingSlashLoc = loc === '/' ? loc : loc.endsWith('/') ? loc : loc + '/'
   return [
     '  <url>',
-    `    <loc>${BASE_URL}${loc}</loc>`,
+    `    <loc>${BASE_URL}${trailingSlashLoc}</loc>`,
     ...images,
     '  </url>',
   ].join('\n')
