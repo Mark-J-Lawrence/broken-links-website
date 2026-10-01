@@ -53,16 +53,9 @@ const lines = [
   '        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">',
 ]
 
-// ── Top-level /videos/ — all videos listed together ──────────────
-lines.push('  <url>')
-lines.push(`    <loc>${BASE_URL}/videos/</loc>`)
-for (const video of videosData) {
-  lines.push(videoBlock(video))
-}
-lines.push('  </url>')
-lines.push('')
-
-// ── Individual video pages — one <url> per video ─────────────────
+// ── One <url> per video at its own canonical page ─────────────────
+// Each video has a unique /videos/[youtubeId]/ page, which is the
+// correct canonical URL to associate the video metadata with.
 for (const video of videosData) {
   lines.push('  <url>')
   lines.push(`    <loc>${BASE_URL}/videos/${video.youtubeId}/</loc>`)
@@ -78,4 +71,4 @@ const outPath = path.join(__dirname, '../public/sitemap-videos.xml')
 fs.writeFileSync(outPath, xml, 'utf8')
 
 console.log(`✓ Written ${outPath}`)
-console.log(`  ${videosData.length} videos (1 top-level entry + ${videosData.length} individual pages)`)
+console.log(`  ${videosData.length} individual video pages`)
