@@ -35,9 +35,12 @@ function escapeXml(str) {
 }
 
 function imageBlock(loc, caption, licenseUrl = `${BASE_URL}/contact`) {
+  const fullUrl = BASE_URL + loc
+  if (seenImages.has(fullUrl)) return null   // already emitted — skip
+  seenImages.add(fullUrl)
   return [
     '    <image:image>',
-    `      <image:loc>${escapeXml(BASE_URL + loc)}</image:loc>`,
+    `      <image:loc>${escapeXml(fullUrl)}</image:loc>`,
     `      <image:caption>${escapeXml(caption)}</image:caption>`,
     `      <image:title>${escapeXml(caption)}</image:title>`,
     `      <image:license>${escapeXml(licenseUrl)}</image:license>`,
@@ -46,6 +49,7 @@ function imageBlock(loc, caption, licenseUrl = `${BASE_URL}/contact`) {
 }
 
 function urlBlock(loc, images) {
+  images = images.filter(Boolean)  // remove nulls from deduplicated imageBlock calls
   if (!images.length) return ''
   const trailingSlashLoc = loc === '/' ? loc : loc.endsWith('/') ? loc : loc + '/'
   return [
@@ -102,6 +106,7 @@ const lines = [
 
 let totalImages = 0
 let totalUrls   = 0
+const seenImages = new Set() // track emitted image URLs to prevent duplicates
 
 // ── 1. MUSIC PAGE — album covers (highest brand value images) ─────
 {
@@ -131,47 +136,14 @@ let totalUrls   = 0
   console.log(`  /about: ${imgs.length} images`)
 }
 
-// ── 3. PHOTOS — each album gets its own URL block ────────────────
-//    /photos/[album-slug]/ with all images from that album.
-//    Also add a top-level /photos/ entry with just the cover images
-//    so the main gallery page is still represented.
+// ── 3. PHOTOS — one <url> per individual photo page ──────────────
+//    Each photo has its own canonical URL /photos/[album]/[photo-id]/
+//    That is the page Google Images links to as the "view" destination.
+//    Listing each image only once (on its own page) avoids duplicates.
 {
-  // Top-level /photos/ — cover images only (one per album)
-  const coverImgs = photosData.map(album => {
-    const cover = album.images[0]
-    if (!cover) return null
-    const caption = `Broken Links — ${album.title}`
-    return imageBlock(cover.localPath, caption)
-  }).filter(Boolean)
-  lines.push(urlBlock('/photos', coverImgs))
-  lines.push('')
-  totalImages += coverImgs.length
-  totalUrls++
-  console.log(`  /photos: ${coverImgs.length} cover images (one per album)`)
-
-  // Individual album pages — all images listed under /photos/[album]/
-  // Individual photo pages — one image each under /photos/[album]/[photo-id]/
-  let albumImageCount = 0
   let photoPageCount = 0
   for (const album of photosData) {
     if (!album.slug) continue
-
-    // Album page: list every image so Google knows which images belong here
-    const albumImgs = album.images.map(image => {
-      const caption = image.title
-        ? `Broken Links — ${album.title} — ${image.title}`
-        : `Broken Links — ${album.title}`
-      return imageBlock(image.localPath, caption)
-    })
-    if (albumImgs.length === 0) continue
-    lines.push(urlBlock(`/photos/${album.slug}`, albumImgs))
-    lines.push('')
-    totalImages += albumImgs.length
-    totalUrls++
-    albumImageCount += albumImgs.length
-
-    // Individual photo pages: one <url> per photo with its single image
-    // This is the URL Google Images will use as the "view" destination
     for (const image of album.images) {
       const caption = image.title
         ? `Broken Links — ${album.title} — ${image.title}`
@@ -183,7 +155,6 @@ let totalUrls   = 0
       photoPageCount++
     }
   }
-  console.log(`  /photos/[album]: ${albumImageCount} images across ${photosData.length} albums`)
   console.log(`  /photos/[album]/[photo]: ${photoPageCount} individual photo pages`)
 }
 
