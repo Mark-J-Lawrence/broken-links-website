@@ -75,6 +75,7 @@ export default function Header() {
                   key={href}
                   href={href}
                   className={`nav-link${isActive ? ' active' : ''}`}
+                  onClick={() => sessionStorage.setItem('nav-intent', '1')}
                 >
                   {label}
                 </Link>
@@ -122,6 +123,7 @@ export default function Header() {
               key={href}
               href={href}
               className={`nav-link${isActive ? ' active' : ''}`}
+              onClick={() => sessionStorage.setItem('nav-intent', '1')}
             >
               {label}
             </Link>

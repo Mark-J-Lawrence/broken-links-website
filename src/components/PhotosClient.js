@@ -26,40 +26,62 @@ const ALL_ALBUMS = SORTED_ALBUMS_DATA.map(album => ({
 }))
 
 /* ── Photo Modal / Lightbox ──────────────────────────────────── */
-function PhotoModal({ photo, photos, onClose, onPrev, onNext }) {
+// photo     = the photo object from ALL_ALBUMS (stable reference from the array)
+// albumTitle = plain string, not an object — avoids creating a new object on every render
+function PhotoModal({ photo, albumTitle, photos, albumId, isOpen, onClose, onPrev, onNext }) {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => { setMounted(true) }, [])
+
   useEffect(() => {
+    if (!isOpen) return
     const onKey = (e) => {
       if (e.key === 'Escape')     onClose()
       if (e.key === 'ArrowRight') onNext()
       if (e.key === 'ArrowLeft')  onPrev()
     }
     document.addEventListener('keydown', onKey)
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
+    document.documentElement.style.setProperty('--scrollbar-w', `${scrollbarWidth}px`)
     document.body.style.overflow = 'hidden'
+    document.body.style.paddingRight = `${scrollbarWidth}px`
     return () => {
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = ''
+      document.body.style.paddingRight = ''
+      document.documentElement.style.removeProperty('--scrollbar-w')
     }
-  }, [onClose, onNext, onPrev])
+  }, [isOpen, onClose, onNext, onPrev])
 
-  if (!photo) return null
+  // Update URL silently via history API — bypasses Next.js router entirely
+  // so no navigation event fires, no re-render, no page flash.
+  useEffect(() => {
+    if (isOpen && photo && albumId) {
+      const targetUrl = `/photos/${albumId}/${photo.id}/`
+      if (window.location.pathname !== targetUrl) {
+        window.history.replaceState(null, '', targetUrl)
+      }
+    }
+  }, [isOpen, photo, albumId])
 
-  const currentIndex = photos.findIndex(p => p.id === photo.id)
+  const currentIndex = photo ? photos.findIndex(p => p.id === photo.id) : 0
   const total = photos.length
 
+  if (!mounted) return null
   return createPortal(
     <div
-      className="modal-backdrop"
-      onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
+      className={`modal-backdrop${isOpen ? ' is-open' : ''}`}
+      onClick={(e) => { if (isOpen && e.target === e.currentTarget) onClose() }}
       role="dialog"
       aria-modal="true"
-      aria-label={photo.title}
+      aria-hidden={!isOpen}
+      aria-label={photo?.title}
     >
       <div className="modal-panel photo-modal-panel">
         {/* Header */}
         <div className="modal-header">
           <div>
-            <p className="section-label" style={{ marginBottom: 4 }}>{photo.album}</p>
-            <h2 className="modal-title">{photo.caption || photo.title}</h2>
+            <p className="section-label" style={{ marginBottom: 4 }}>{albumTitle}</p>
+            <h2 className="modal-title">{photo?.caption || photo?.title}</h2>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <span style={{
@@ -72,13 +94,15 @@ function PhotoModal({ photo, photos, onClose, onPrev, onNext }) {
           </div>
         </div>
 
-        {/* Photo */}
+        {/* Photo — always a single <img> in the DOM so the previous photo
+            stays visible while the next one loads (no blank-flash on nav) */}
         <div className="photo-modal-img-wrap">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={imgSrc(photo.src)}
-            alt={`Broken Links — ${photo.caption || photo.title}`}
+            src={photo ? imgSrc(photo.src) : undefined}
+            alt={photo ? `Broken Links — ${photo.caption || photo.title}` : ''}
             className="photo-modal-img"
+            style={{ visibility: photo ? 'visible' : 'hidden' }}
           />
 
           {/* Prev / Next arrows */}
@@ -86,7 +110,6 @@ function PhotoModal({ photo, photos, onClose, onPrev, onNext }) {
             className="photo-nav photo-nav-prev"
             onClick={onPrev}
             aria-label="Previous photo"
-            disabled={currentIndex === 0}
           >
             ‹
           </button>
@@ -94,7 +117,6 @@ function PhotoModal({ photo, photos, onClose, onPrev, onNext }) {
             className="photo-nav photo-nav-next"
             onClick={onNext}
             aria-label="Next photo"
-            disabled={currentIndex === total - 1}
           >
             ›
           </button>
@@ -103,7 +125,7 @@ function PhotoModal({ photo, photos, onClose, onPrev, onNext }) {
         {/* Caption */}
         <div className="modal-body" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: 0 }}>
-            {photo.album}
+            {albumTitle}
           </p>
           <p style={{
             fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
@@ -163,14 +185,50 @@ function AlbumCard({ album, onClick }) {
   )
 }
 
+/* ── URL parsing helper ──────────────────────────────────────── */
+/**
+ * Parses the current pathname to extract album slug and photo ID.
+ * Handles:
+ *   /photos/                          → { albumSlug: null, photoId: null }
+ *   /photos/some-album-slug/          → { albumSlug: 'some-album-slug', photoId: null }
+ *   /photos/some-album-slug/18194/    → { albumSlug: 'some-album-slug', photoId: '18194' }
+ */
+function parsePhotosPath(pathname) {
+  // Strip trailing slash then split
+  const parts = pathname.replace(/\/$/, '').split('/')
+  // parts[0] = '', parts[1] = 'photos', parts[2] = albumSlug?, parts[3] = photoId?
+  const albumSlug = parts[2] || null
+  const photoId   = parts[3] || null
+  return { albumSlug, photoId }
+}
+
 /* ── Main Page ───────────────────────────────────────────────── */
 export default function PhotosClient() {
   const [selectedAlbum, setSelectedAlbum] = useState(null)
   const [activePhoto, setActivePhoto] = useState(null)
   const [savedScrollPosition, setSavedScrollPosition] = useState(0)
+  const [urlInitialised, setUrlInitialised] = useState(false)
 
   const currentPhotos = selectedAlbum ? selectedAlbum.images : []
   const currentIndex = activePhoto ? currentPhotos.findIndex(p => p.id === activePhoto.id) : -1
+
+  // ── On mount: read URL and open the right album / photo ─────
+  useEffect(() => {
+    if (urlInitialised) return
+    const { albumSlug, photoId } = parsePhotosPath(window.location.pathname)
+
+    if (albumSlug) {
+      const album = ALL_ALBUMS.find(a => a.id === albumSlug)
+      if (album) {
+        setSelectedAlbum(album)
+        if (photoId) {
+          const photo = album.images.find(p => p.id === photoId)
+          if (photo) setActivePhoto(photo)
+        }
+      }
+    }
+    setUrlInitialised(true)
+  }, [urlInitialised])
 
   // Scroll to top when album is selected
   useEffect(() => {
@@ -190,26 +248,34 @@ export default function PhotosClient() {
   }, [selectedAlbum, savedScrollPosition])
 
   const handlePrev = useCallback(() => {
-    if (currentIndex <= 0) return
-    setActivePhoto(currentPhotos[currentIndex - 1])
+    if (!currentPhotos.length) return
+    const prevIndex = currentIndex <= 0 ? currentPhotos.length - 1 : currentIndex - 1
+    setActivePhoto(currentPhotos[prevIndex])
   }, [currentIndex, currentPhotos])
 
   const handleNext = useCallback(() => {
-    if (currentIndex >= currentPhotos.length - 1) return
-    setActivePhoto(currentPhotos[currentIndex + 1])
+    if (!currentPhotos.length) return
+    const nextIndex = currentIndex >= currentPhotos.length - 1 ? 0 : currentIndex + 1
+    setActivePhoto(currentPhotos[nextIndex])
   }, [currentIndex, currentPhotos])
 
-  const handleClose = useCallback(() => setActivePhoto(null), [])
+  const handleClose = useCallback(() => {
+    setActivePhoto(null)
+    if (selectedAlbum) {
+      window.history.replaceState(null, '', `/photos/${selectedAlbum.id}/`)
+    }
+  }, [selectedAlbum])
 
   const handleSelectAlbum = (album) => {
-    // Save current scroll position before selecting album
     setSavedScrollPosition(window.scrollY)
     setSelectedAlbum(album)
+    window.history.replaceState(null, '', `/photos/${album.id}/`)
   }
 
   const handleBackToAlbums = () => {
     setSelectedAlbum(null)
     setActivePhoto(null)
+    window.history.replaceState(null, '', '/photos/')
   }
 
   const totalPhotos = ALL_ALBUMS.reduce((sum, album) => sum + album.count, 0)
@@ -309,17 +375,17 @@ export default function PhotosClient() {
         </>
       )}
 
-      {/* ── Modal ─────────────────────────────────────────────── */}
-      {activePhoto && selectedAlbum && (
-        <PhotoModal
-          photo={{ ...activePhoto, album: selectedAlbum.title }}
-          photos={currentPhotos}
-          onClose={handleClose}
-          onPrev={handlePrev}
-          onNext={handleNext}
-        />
-      )}
+      {/* ── Modal — always mounted, toggled via isOpen ────────── */}
+      <PhotoModal
+        isOpen={!!(activePhoto && selectedAlbum)}
+        photo={activePhoto}
+        albumTitle={selectedAlbum?.title}
+        albumId={selectedAlbum?.id}
+        photos={currentPhotos}
+        onClose={handleClose}
+        onPrev={handlePrev}
+        onNext={handleNext}
+      />
     </>
   )
 }
-

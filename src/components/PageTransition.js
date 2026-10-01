@@ -4,33 +4,33 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 
 /**
- * PageTransition — wraps page content with a fade-in + slight upward slide
- * on every route change. Uses a key derived from the pathname so React
- * remounts the wrapper (and re-runs the animation) on each navigation.
- * Also scrolls to top on route change.
+ * PageTransition — only animates when the user explicitly navigates via a
+ * header nav link. Header links set a 'nav-intent' flag in sessionStorage
+ * before the route changes; we check and clear it here. Any other pathname
+ * change (router.replace inside modals, sub-path URL syncing, etc.) is
+ * ignored.
  */
 export default function PageTransition({ children }) {
   const pathname = usePathname()
   const ref = useRef(null)
 
   useEffect(() => {
-    // Scroll to top on route change
+    const intent = sessionStorage.getItem('nav-intent')
+    if (!intent) return
+
+    sessionStorage.removeItem('nav-intent')
     window.scrollTo(0, 0)
-    
+
     const el = ref.current
     if (!el) return
-    // Remove then re-add the class to restart the animation
     el.classList.remove('page-enter')
-    // Force reflow so the browser registers the removal
     void el.offsetWidth
     el.classList.add('page-enter')
   }, [pathname])
 
   return (
-    <div ref={ref} className="page-enter">
+    <div ref={ref}>
       {children}
     </div>
   )
 }
-
-

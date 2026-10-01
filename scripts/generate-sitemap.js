@@ -17,6 +17,9 @@ const path         = require('path')
 const matter       = require('gray-matter')
 const { execSync } = require('child_process')
 
+const PHOTOS_DATA = JSON.parse(fs.readFileSync(path.join(__dirname, '../src/data/photos.json'), 'utf8'))
+const VIDEOS_DATA = JSON.parse(fs.readFileSync(path.join(__dirname, '../src/data/videos.json'), 'utf8'))
+
 const BASE_URL  = 'https://www.brokenlinksmusic.co.uk'
 const POSTS_DIR = path.join(__dirname, '../src/data/blog-posts')
 const ROOT      = path.join(__dirname, '..')
@@ -148,6 +151,34 @@ function buildSitemap() {
     <lastmod>${venueLastmod}</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
+  </url>`)
+  }
+
+  // ── Photo album pages — one URL per album ─────────────────────
+  const photosLastmod = gitLastMod('src/data/photos.json') || formatDate(new Date())
+  console.log(`Found ${PHOTOS_DATA.length} photo albums`)
+  for (const album of PHOTOS_DATA) {
+    if (!album.slug) continue
+    const lastmod = album.date ? formatDate(new Date(album.date)) : photosLastmod
+    urls.push(`  <url>
+    <loc>${BASE_URL}/photos/${album.slug}/</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>`)
+  }
+
+  // ── Individual video pages — one URL per video ────────────────
+  const videosLastmod = gitLastMod('src/data/videos.json') || formatDate(new Date())
+  console.log(`Found ${VIDEOS_DATA.length} videos`)
+  for (const video of VIDEOS_DATA) {
+    if (!video.youtubeId) continue
+    const lastmod = video.date ? formatDate(new Date(video.date)) : videosLastmod
+    urls.push(`  <url>
+    <loc>${BASE_URL}/videos/${video.youtubeId}/</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
   </url>`)
   }
 

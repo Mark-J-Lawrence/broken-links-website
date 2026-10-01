@@ -179,8 +179,8 @@ main#content {
 }
 
 @keyframes scaleIn {
-  from { transform: scale(0.94); }
-  to   { transform: scale(1); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @keyframes glowPulse {
@@ -597,6 +597,7 @@ main#content {
   -webkit-backdrop-filter: blur(12px) saturate(1.2);
   border-bottom: 1px solid var(--border);
   transition: border-color var(--transition), background var(--transition);
+  padding-right: var(--scrollbar-w, 0px);
 }
 
 .site-header.scrolled {
@@ -2667,7 +2668,15 @@ main#content {
   justify-content: center;
   padding: 24px;
   backdrop-filter: blur(4px);
-  animation: fadeIn 0.2s ease;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.modal-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  animation: none;
 }
 
 .modal-panel {
@@ -2678,7 +2687,6 @@ main#content {
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  animation: scaleIn 0.25s cubic-bezier(0.4,0,0.2,1);
 }
 
 /* Accent top border on modal */
@@ -2772,7 +2780,7 @@ main#content {
   position: relative;
   background: var(--bg);
   overflow: hidden;
-  max-height: 65vh;
+  height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2780,7 +2788,7 @@ main#content {
 
 .photo-modal-img {
   max-width: 100%;
-  max-height: 65vh;
+  max-height: 100%;
   object-fit: contain;
   display: block;
 }
