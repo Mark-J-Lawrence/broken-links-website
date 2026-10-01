@@ -35,12 +35,9 @@ function escapeXml(str) {
 }
 
 function imageBlock(loc, caption, licenseUrl = `${BASE_URL}/contact`) {
-  const fullUrl = BASE_URL + loc
-  if (seenImages.has(fullUrl)) return null   // already emitted — skip
-  seenImages.add(fullUrl)
   return [
     '    <image:image>',
-    `      <image:loc>${escapeXml(fullUrl)}</image:loc>`,
+    `      <image:loc>${escapeXml(BASE_URL + loc)}</image:loc>`,
     `      <image:caption>${escapeXml(caption)}</image:caption>`,
     `      <image:title>${escapeXml(caption)}</image:title>`,
     `      <image:license>${escapeXml(licenseUrl)}</image:license>`,
@@ -49,7 +46,6 @@ function imageBlock(loc, caption, licenseUrl = `${BASE_URL}/contact`) {
 }
 
 function urlBlock(loc, images) {
-  images = images.filter(Boolean)  // remove nulls from deduplicated imageBlock calls
   if (!images.length) return ''
   const trailingSlashLoc = loc === '/' ? loc : loc.endsWith('/') ? loc : loc + '/'
   return [
@@ -106,7 +102,6 @@ const lines = [
 
 let totalImages = 0
 let totalUrls   = 0
-const seenImages = new Set() // track emitted image URLs to prevent duplicates
 
 // ── 1. MUSIC PAGE — album covers (highest brand value images) ─────
 {
