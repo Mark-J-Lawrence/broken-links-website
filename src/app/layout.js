@@ -107,15 +107,6 @@ const SCHEMA_ORG = {
     'https://brokenlinksmusic.bandcamp.com',
     'https://open.spotify.com/artist/broken-links',
   ],
-  subjectOf: {
-    '@type': 'VideoObject',
-    name: 'Fatalism (Official Video)',
-    description: 'Official music video for Fatalism — taken from the album Conflict::States (2021).',
-    thumbnailUrl: 'https://img.youtube.com/vi/Qu9HaA3J0W0/maxresdefault.jpg',
-    uploadDate: '2021-11-05T00:00:00+00:00',
-    embedUrl: 'https://www.youtube.com/embed/Qu9HaA3J0W0',
-    duration: 'PT4M15S'
-  }
 }
 
 export default function RootLayout({ children }) {
