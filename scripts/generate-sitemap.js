@@ -12,30 +12,31 @@
  * Run: node scripts/generate-sitemap.js
  */
 
-const fs           = require('fs')
-const path         = require('path')
-const matter       = require('gray-matter')
+const fs = require('fs')
+const path = require('path')
+const matter = require('gray-matter')
 const { execSync } = require('child_process')
 
 const PHOTOS_DATA = JSON.parse(fs.readFileSync(path.join(__dirname, '../src/data/photos.json'), 'utf8'))
 const VIDEOS_DATA = JSON.parse(fs.readFileSync(path.join(__dirname, '../src/data/videos.json'), 'utf8'))
+const GIGS_DATA = JSON.parse(fs.readFileSync(path.join(__dirname, '../src/data/gigs.json'), 'utf8'))
 
-const BASE_URL  = 'https://www.brokenlinksmusic.co.uk'
+const BASE_URL = 'https://www.brokenlinksmusic.co.uk'
 const POSTS_DIR = path.join(__dirname, '../src/data/blog-posts')
-const ROOT      = path.join(__dirname, '..')
+const ROOT = path.join(__dirname, '..')
 
 // Static routes — lastmod is driven by the files listed in `watches`
 const STATIC_ROUTES = [
-  { path: '/',             priority: '1.0', changefreq: 'weekly',  watches: ['src/data/gigs.json', 'src/data/videos.json', 'src/data/photos.json', 'src/data/albums.json'] },
-  { path: '/about',        priority: '0.8', changefreq: 'monthly', watches: ['src/app/about/page.js'] },
-  { path: '/music',        priority: '0.9', changefreq: 'monthly', watches: ['src/data/albums.json', 'src/app/music/page.js'] },
-  { path: '/videos',       priority: '0.8', changefreq: 'monthly', watches: ['src/data/videos.json'] },
-  { path: '/live',         priority: '0.8', changefreq: 'weekly',  watches: ['src/data/gigs.json'] },
+  { path: '/', priority: '1.0', changefreq: 'weekly', watches: ['src/data/gigs.json', 'src/data/videos.json', 'src/data/photos.json', 'src/data/albums.json'] },
+  { path: '/about', priority: '0.8', changefreq: 'monthly', watches: ['src/app/about/page.js'] },
+  { path: '/music', priority: '0.9', changefreq: 'monthly', watches: ['src/data/albums.json', 'src/app/music/page.js'] },
+  { path: '/videos', priority: '0.8', changefreq: 'monthly', watches: ['src/data/videos.json'] },
+  { path: '/live', priority: '0.8', changefreq: 'weekly', watches: ['src/data/gigs.json'] },
   { path: '/live/history', priority: '0.6', changefreq: 'monthly', watches: ['src/data/gigs.json'] },
-  { path: '/photos',       priority: '0.7', changefreq: 'monthly', watches: ['src/data/photos.json'] },
-  { path: '/press',        priority: '0.7', changefreq: 'monthly', watches: ['src/data/blog-posts'] },
-  { path: '/contact',      priority: '0.6', changefreq: 'yearly',  watches: ['src/app/contact/page.js'] },
-  { path: '/news',         priority: '0.9', changefreq: 'weekly',  watches: ['src/data/blog-posts'] },
+  { path: '/photos', priority: '0.7', changefreq: 'monthly', watches: ['src/data/photos.json'] },
+  { path: '/press', priority: '0.7', changefreq: 'monthly', watches: ['src/data/blog-posts'] },
+  { path: '/contact', priority: '0.6', changefreq: 'yearly', watches: ['src/app/contact/page.js'] },
+  { path: '/news', priority: '0.9', changefreq: 'weekly', watches: ['src/data/blog-posts'] },
 ]
 
 function formatDate(d) {
@@ -151,6 +152,19 @@ function buildSitemap() {
     <lastmod>${venueLastmod}</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
+  </url>`)
+  }
+
+  // ── Individual event pages — one URL per gig ─────────────────
+  const gigsLastmod = gitLastMod('src/data/gigs.json') || formatDate(new Date())
+  console.log(`Found ${GIGS_DATA.length} gigs`)
+  for (const gig of GIGS_DATA) {
+    if (!gig.slug) continue
+    urls.push(`  <url>
+    <loc>${BASE_URL}/live/events/${gig.slug}/</loc>
+    <lastmod>${gigsLastmod}</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>`)
   }
 

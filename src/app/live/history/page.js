@@ -61,9 +61,9 @@ export default function LiveHistoryPage() {
                 <div className="shows-list">
                   {shows.map((gig, i) => {
                     const d = new Date(gig.date)
-                    const day   = d.getUTCDate().toString().padStart(2, '0')
+                    const day = d.getUTCDate().toString().padStart(2, '0')
                     const month = d.toLocaleDateString('en-GB', { month: 'short', timeZone: 'UTC' }).toUpperCase()
-                    const yr    = d.getUTCFullYear()
+                    const yr = d.getUTCFullYear()
 
                     return (
                       <div key={gig.id} className={`show-item reveal delay-${(i % 6) + 1}`}>
@@ -74,8 +74,8 @@ export default function LiveHistoryPage() {
 
                         <div className="show-info">
                           <p className="show-venue">
-                            <Link href={`/live/venues/${gig.venueSlug}`} className="show-venue-link">
-                              {gig.venueName}
+                            <Link href={`/live/events/${gig.slug}`} className="show-venue-link">
+                              {gig.title || gig.venueName}
                             </Link>
                           </p>
                           <p className="show-location">
@@ -86,11 +86,11 @@ export default function LiveHistoryPage() {
 
                         <div className="show-action">
                           <Link
-                            href={`/live/venues/${gig.venueSlug}`}
+                            href={`/live/events/${gig.slug}`}
                             className="btn btn-outline"
                             style={{ fontSize: '0.65rem', padding: '8px 16px' }}
                           >
-                            Venue →
+                            Event details →
                           </Link>
                         </div>
                       </div>

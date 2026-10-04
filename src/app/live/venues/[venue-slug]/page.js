@@ -40,9 +40,9 @@ function formatDate(dateStr) {
 
 function formatDateShort(dateStr) {
   const d = new Date(dateStr)
-  const day   = d.getUTCDate().toString().padStart(2, '0')
+  const day = d.getUTCDate().toString().padStart(2, '0')
   const month = d.toLocaleDateString('en-GB', { month: 'short', timeZone: 'UTC' }).toUpperCase()
-  const year  = d.getUTCFullYear()
+  const year = d.getUTCFullYear()
   return { day, month, year }
 }
 
@@ -61,7 +61,7 @@ export default async function VenuePage({ params }) {
     .sort((a, b) => new Date(b.date) - new Date(a.date))
 
   const upcomingShows = venueShows.filter(g => g.date >= today)
-  const pastShows     = venueShows.filter(g => g.date < today)
+  const pastShows = venueShows.filter(g => g.date < today)
 
   // Build Google Maps URL
   const addressParts = [venue.address, venue.city, venue.postcode, venue.country].filter(Boolean)
@@ -242,7 +242,11 @@ export default async function VenuePage({ params }) {
                             {month} {year}
                           </div>
                           <div className="show-info">
-                            <p className="show-venue">{gig.title || venueName}</p>
+                            <p className="show-venue">
+                              <Link href={`/live/events/${gig.slug}`} className="show-venue-link">
+                                {gig.title || venueName}
+                              </Link>
+                            </p>
                           </div>
                           <div className="show-action">
                             {hasTickets ? (
@@ -278,7 +282,11 @@ export default async function VenuePage({ params }) {
                             {month} {year}
                           </div>
                           <div className="show-info">
-                            <p className="show-venue">{gig.title || venueName}</p>
+                            <p className="show-venue">
+                              <Link href={`/live/events/${gig.slug}`} className="show-venue-link">
+                                {gig.title || venueName}
+                              </Link>
+                            </p>
                           </div>
                           <div className="show-action">
                             <span style={{

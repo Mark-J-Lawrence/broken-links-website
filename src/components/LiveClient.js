@@ -7,9 +7,9 @@ import MailingListForm from './MailingListForm'
 /* ── Show Row ────────────────────────────────────────────────── */
 function ShowRow({ gig, index, today }) {
   const d = new Date(gig.date)
-  const day   = d.getUTCDate().toString().padStart(2, '0')
+  const day = d.getUTCDate().toString().padStart(2, '0')
   const month = d.toLocaleDateString('en-GB', { month: 'short', timeZone: 'UTC' }).toUpperCase()
-  const year  = d.getUTCFullYear()
+  const year = d.getUTCFullYear()
 
   const isPast = gig.date < today
   const hasTickets = gig.ticketUrl && !gig.ticketUrl.includes('brokenlinksmusic.co.uk')
@@ -23,7 +23,7 @@ function ShowRow({ gig, index, today }) {
 
       <div className="show-info">
         <p className="show-venue">
-          <Link href={`/live/venues/${gig.venueSlug}`} className="show-venue-link">
+          <Link href={`/live/events/${gig.slug}`} className="show-venue-link">
             {gig.venueName}
           </Link>
         </p>
@@ -36,11 +36,11 @@ function ShowRow({ gig, index, today }) {
       <div className="show-action">
         {isPast || !hasTickets ? (
           <Link
-            href={`/live/venues/${gig.venueSlug}`}
+            href={`/live/events/${gig.slug}`}
             className="btn btn-outline"
             style={{ fontSize: '0.65rem', padding: '8px 16px' }}
           >
-            Venue →
+            Event details →
           </Link>
         ) : (
           <a
@@ -65,7 +65,7 @@ export default function LiveClient({ gigsData }) {
 
   const allGigs = [...gigsData].sort((a, b) => new Date(b.date) - new Date(a.date))
   const upcomingShows = allGigs.filter(g => g.date >= today && g.status !== 'cancelled')
-  const recentShows   = allGigs.filter(g => g.date < today).slice(0, 5)
+  const recentShows = allGigs.filter(g => g.date < today).slice(0, 5)
 
   return (
     <>
