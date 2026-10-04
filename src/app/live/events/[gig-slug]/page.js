@@ -18,6 +18,10 @@ function formatDate(date, time) {
     return time ? `${dateLabel} at ${time}` : dateLabel
 }
 
+function getEventName(gig, venueName) {
+    return gig.title && gig.title !== venueName ? gig.title : `Broken Links at ${venueName}`
+}
+
 function getPrice(price) {
     if (price === 'Free') return 0
     const amount = Number.parseFloat(String(price || '').replace(/[^\d.]/g, ''))
@@ -40,7 +44,7 @@ function getEventSchema(gig, venue) {
         '@type': 'MusicEvent',
         '@id': eventUrl,
         url: eventUrl,
-        name: gig.title && gig.title !== venueName ? gig.title : `Broken Links at ${venueName}`,
+        name: getEventName(gig, venueName),
         startDate,
         eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
         location: {
@@ -83,10 +87,15 @@ export async function generateMetadata({ params }) {
     if (!gig) return { title: 'Event Not Found' }
 
     const venue = venuesData.find(item => item.slug === gig.venueSlug)
-    const title = gig.title || `Broken Links at ${venue?.name || gig.venueName}`
+    const venueName = venue?.name || gig.venueName
+    const eventName = getEventName(gig, venueName)
+    const eventDate = new Date(`${gig.date}T12:00:00Z`).toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC',
+    })
+    const title = `${eventName} | ${eventDate}`
     return {
-        title,
-        description: `${title} on ${formatDate(gig.date, gig.time)} in ${gig.city}${gig.country ? `, ${gig.country}` : ''}.`,
+        title: { absolute: title },
+        description: `${eventName} on ${formatDate(gig.date, gig.time)} in ${gig.city}${gig.country ? `, ${gig.country}` : ''}.`,
         alternates: { canonical: `${BASE_URL}/live/events/${gig.slug}/` },
         openGraph: { title, type: 'article' },
     }
@@ -126,7 +135,7 @@ export default async function EventPage({ params }) {
                     </nav>
                     <PageTitle
                         label="Live Event"
-                        title={gig.title && gig.title !== venueName ? gig.title : `Broken Links at ${venueName}`}
+                        title={getEventName(gig, venueName)}
                         subtitle={`${dateLabel} · ${gig.city}${gig.country ? `, ${gig.country}` : ''}`}
                     />
                 </div>
