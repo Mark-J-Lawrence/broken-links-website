@@ -28,10 +28,22 @@ function getPrice(price) {
     return Number.isFinite(amount) ? amount : null
 }
 
+const BAND_IMAGE = `${BASE_URL}/images/uploads/2021/02/Split-4000x2250-1-1024x576.jpg`
+
 function getEventSchema(gig, venue) {
     const eventUrl = `${BASE_URL}/live/events/${gig.slug}/`
     const venueName = venue?.name || gig.venueName
     const startDate = gig.time ? `${gig.date}T${gig.time}:00` : gig.date
+    // If endTime is midnight (00:00) the show crosses into the next day
+    const endDate = (() => {
+        if (!gig.endTime) return startDate
+        if (gig.endTime === '00:00') {
+            const next = new Date(`${gig.date}T00:00:00Z`)
+            next.setUTCDate(next.getUTCDate() + 1)
+            return `${next.toISOString().slice(0, 10)}T00:00:00`
+        }
+        return `${gig.date}T${gig.endTime}:00`
+    })()
     const price = getPrice(gig.price)
     const hasTicketPage = Boolean(
         gig.date >= new Date().toISOString().slice(0, 10)
@@ -39,6 +51,37 @@ function getEventSchema(gig, venue) {
         && gig.ticketUrl
         && !gig.ticketUrl.includes('brokenlinksmusic.co.uk')
     )
+
+    // eventStatus — always present
+    let eventStatus
+    if (gig.status === 'cancelled') eventStatus = 'https://schema.org/EventCancelled'
+    else if (gig.date >= new Date().toISOString().slice(0, 10)) eventStatus = 'https://schema.org/EventScheduled'
+    else eventStatus = 'https://schema.org/EventScheduled'
+
+    // offers — always present (free admission when no ticket URL / price unknown)
+    const availability = gig.soldOut
+        ? 'https://schema.org/SoldOut'
+        : 'https://schema.org/InStock'
+    let offers
+    if (hasTicketPage && price !== null) {
+        offers = {
+            '@type': 'Offer',
+            url: gig.ticketUrl,
+            price,
+            priceCurrency: 'GBP',
+            availability,
+        }
+    } else {
+        const offerPrice = price !== null ? price : 0
+        offers = {
+            '@type': 'Offer',
+            url: eventUrl,
+            price: offerPrice,
+            priceCurrency: 'GBP',
+            availability,
+        }
+    }
+
     const event = {
         '@context': 'https://schema.org',
         '@type': 'MusicEvent',
@@ -46,7 +89,10 @@ function getEventSchema(gig, venue) {
         url: eventUrl,
         name: getEventName(gig, venueName),
         startDate,
+        endDate,
+        eventStatus,
         eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+        image: gig.image || BAND_IMAGE,
         location: {
             '@type': 'Place',
             name: venueName,
@@ -64,18 +110,13 @@ function getEventSchema(gig, venue) {
             name: 'Broken Links',
             url: BASE_URL,
         },
-    }
-
-    event.description = gig.notes || `Broken Links live at ${venueName} in ${gig.city}.`
-    if (gig.status === 'cancelled') event.eventStatus = 'https://schema.org/EventCancelled'
-    else if (gig.date >= new Date().toISOString().slice(0, 10)) event.eventStatus = 'https://schema.org/EventScheduled'
-    if (hasTicketPage && price !== null) {
-        event.offers = {
-            '@type': 'Offer',
-            url: gig.ticketUrl,
-            price,
-            priceCurrency: 'GBP',
-        }
+        organizer: {
+            '@type': 'MusicGroup',
+            name: 'Broken Links',
+            url: BASE_URL,
+        },
+        offers,
+        description: gig.notes || `Broken Links live at ${venueName} in ${gig.city}.`,
     }
 
     return event
