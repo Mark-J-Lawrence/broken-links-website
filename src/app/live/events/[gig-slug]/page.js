@@ -70,6 +70,7 @@ function getEventSchema(gig, venue) {
             price,
             priceCurrency: 'GBP',
             availability,
+            validFrom: `${gig.date}T00:00:00`,
         }
     } else {
         const offerPrice = price !== null ? price : 0
@@ -79,6 +80,7 @@ function getEventSchema(gig, venue) {
             price: offerPrice,
             priceCurrency: 'GBP',
             availability,
+            validFrom: `${gig.date}T00:00:00`,
         }
     }
 
