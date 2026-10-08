@@ -10,9 +10,13 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const { tag } = await params
+  const decodedTag = decodeURIComponent(tag)
   return {
-    title: `#${tag}`,
-    description: `Broken Links news articles tagged with "${tag}".`,
+    title: `#${decodedTag}`,
+    description: `Broken Links news articles tagged with "${decodedTag}".`,
+    alternates: {
+      canonical: `https://www.brokenlinksmusic.co.uk/news/tag/${encodeURIComponent(decodedTag)}/`,
+    },
   }
 }
 
@@ -26,9 +30,12 @@ const CATEGORY_COLOURS = {
 
 export default async function TagPage({ params }) {
   const { tag } = await params
-  const posts = getPostsByTag(tag)
+  const decodedTag = decodeURIComponent(tag)
+  const posts = getPostsByTag(decodedTag)
 
-  if (!posts) notFound()
+  if (!posts || posts.length === 0) {
+    notFound()
+  }
 
   const catColour = (cat) => CATEGORY_COLOURS[cat?.toLowerCase()] || 'var(--text-muted)'
 
@@ -44,8 +51,8 @@ export default async function TagPage({ params }) {
           </nav>
           <PageTitle
             label="Tag"
-            title={`#${tag}`}
-            subtitle={`${posts.length} post${posts.length !== 1 ? 's' : ''} tagged with "${tag}".`}
+            title={`#${decodedTag}`}
+            subtitle={`${posts.length} post${posts.length !== 1 ? 's' : ''} tagged with "${decodedTag}".`}
           />
         </div>
       </section>

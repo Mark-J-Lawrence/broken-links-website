@@ -46,7 +46,42 @@ export async function generateMetadata({ params }) {
   }
 }
 
+/* ── Per-video VideoObject schema ───────────────────────────────── */
+function videoSchema(video, id) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: video.title,
+    description: video.description || `${video.title} by Broken Links`,
+    thumbnailUrl: [
+      `https://img.youtube.com/vi/${id}/maxresdefault.jpg`,
+      `https://img.youtube.com/vi/${id}/hqdefault.jpg`,
+    ],
+    uploadDate: `${video.date}T00:00:00+00:00`,
+    embedUrl: `https://www.youtube.com/embed/${id}`,
+    url: `${BASE_URL}/videos/${id}/`,
+    publisher: {
+      '@type': 'MusicGroup',
+      name: 'Broken Links',
+      url: BASE_URL,
+    },
+  }
+}
+
 /* ── Page ───────────────────────────────────────────────────────── */
-export default function VideoPage() {
-  return <VideosClient />
+export default async function VideoPage({ params }) {
+  const { id } = await params
+  const video = videosData.find((v) => v.youtubeId === id)
+
+  return (
+    <>
+      {video && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema(video, id)) }}
+        />
+      )}
+      <VideosClient />
+    </>
+  )
 }
