@@ -13,11 +13,15 @@ export async function generateStaticParams() {
 /* ── Per-venue metadata ──────────────────────────────────────── */
 export async function generateMetadata({ params }) {
   const resolvedParams = await params
-  const venue = venuesData.find(v => v.slug === resolvedParams['venue-slug'])
+  const slug = resolvedParams['venue-slug']
+  const venue = venuesData.find(v => v.slug === slug)
   if (!venue) return { title: 'Venue Not Found' }
   return {
     title: venue.name,
     description: `${venue.name} — ${venue.city}${venue.country ? ', ' + venue.country : ''}. Broken Links live shows at this venue.`,
+    alternates: {
+      canonical: `https://www.brokenlinksmusic.co.uk/live/venues/${slug}/`,
+    },
   }
 }
 
