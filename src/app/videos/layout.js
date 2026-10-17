@@ -37,9 +37,7 @@ const videoSchemas = videosData.map((v) => ({
   embedUrl: `https://www.youtube.com/embed/${v.youtubeId}`,
   url: `${BASE_URL}/videos/${v.youtubeId}/`,
   publisher: {
-    '@type': 'MusicGroup',
-    name: 'Broken Links',
-    url: BASE_URL,
+    '@id': `${BASE_URL}/#band`,
   },
 }))
 

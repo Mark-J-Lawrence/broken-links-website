@@ -77,6 +77,7 @@ export const metadata = {
 const SCHEMA_ORG = {
   '@context': 'https://schema.org',
   '@type': 'MusicGroup',
+  '@id': `${BASE_URL}/#band`,
   name: 'Broken Links',
   url: BASE_URL,
   logo: 'https://www.brokenlinksmusic.co.uk/android-chrome-512x512.png',
@@ -86,13 +87,18 @@ const SCHEMA_ORG = {
   foundingDate: '2008',
   foundingLocation: {
     '@type': 'Place',
-    name: 'Southampton',
-    addressCountry: 'GB',
+    name: 'Eastleigh, Hampshire, UK',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Eastleigh',
+      addressRegion: 'Hampshire',
+      addressCountry: 'GB',
+    },
   },
   member: [
-    { '@type': 'OrganizationRole', member: { '@type': 'Person', name: 'Mark Lawrence' }, roleName: 'Vocals, Guitar' },
-    { '@type': 'OrganizationRole', member: { '@type': 'Person', name: 'Lewis Betteridge' }, roleName: 'Bass' },
-    { '@type': 'OrganizationRole', member: { '@type': 'Person', name: 'Phil Boulter' }, roleName: 'Drums' },
+    { '@type': 'Person', name: 'Mark Lawrence', jobTitle: 'Vocals, Guitar' },
+    { '@type': 'Person', name: 'Lewis Betteridge', jobTitle: 'Bass' },
+    { '@type': 'Person', name: 'Phil Boulter', jobTitle: 'Drums' },
   ],
   album: [
     { '@type': 'MusicAlbum', name: 'Disasters: Ways to Leave a Scene', datePublished: '2012' },
@@ -104,8 +110,11 @@ const SCHEMA_ORG = {
     'https://www.facebook.com/brokenlinksmusic',
     'https://x.com/broken_links',
     'https://www.instagram.com/brokenlinksmusic',
-    'https://brokenlinksmusic.bandcamp.com',
-    'https://open.spotify.com/artist/broken-links',
+    'https://www.youtube.com/user/brokenlinksmusic/',
+    'https://www.tiktok.com/@brokenlinksmusic',
+    'https://open.spotify.com/artist/0VBx7ymL8y6CI3TgOFFhTz',
+    'https://music.apple.com/gb/artist/broken-links/305262241',
+    'https://brokenlinks.bandcamp.com/',
   ],
 }
 
@@ -156,5 +165,4 @@ export default function RootLayout({ children }) {
     </html>
   )
 }
-
 
