@@ -1,14 +1,15 @@
 /**
  * /photos/[album]/[photo]/page.js
  *
- * Pre-rendered static page for each individual photo.
- * The client reads the URL and opens the album + lightbox for this photo.
+ * Pre-rendered, visible landing page for each individual photo.
  *
  * URL pattern: /photos/live-the-hobbit-southampton-03-10-2021/18194/
  */
 
 import photosData from '../../../../data/photos.json'
-import PhotosClient from '../../../../components/PhotosClient'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import PageTitle from '../../../../components/PageTitle'
 import { imgSrc } from '../../../../lib/basePath'
 
 const BASE_URL = 'https://www.brokenlinksmusic.co.uk'
@@ -64,26 +65,58 @@ export default async function PhotoPage({ params }) {
   const album = photosData.find((a) => a.slug === albumSlug)
   const image = album?.images.find((img) => String(img.id) === photoId)
 
+  if (!album || !image) notFound()
+
+  const photoTitle = image.title || album.title
+  const imageAlt = `Broken Links — ${album.title}${image.title ? ` — ${image.title}` : ''}`
+  const imageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ImageObject',
+    contentUrl: `${BASE_URL}${image.localPath}`,
+    name: photoTitle,
+    description: `Photo from ${album.title} by Broken Links.`,
+    creditText: 'Broken Links',
+    copyrightNotice: '© Broken Links. All rights reserved.',
+    license: `${BASE_URL}/photos/`,
+    acquireLicensePage: `${BASE_URL}/contact/`,
+    creator: {
+      '@type': 'Organization',
+      name: 'Broken Links',
+      url: BASE_URL,
+    },
+  }
+
   return (
     <>
-      {/* Googlebot-visible single image */}
-      {image && (
-        <div
-          aria-hidden="true"
-          style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', opacity: 0, pointerEvents: 'none' }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={imgSrc(image.localPath)}
-            alt={`Broken Links — ${album.title}${image.title ? ` — ${image.title}` : ''}`}
-            width="800"
-            height="533"
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(imageSchema) }}
+      />
+      <section className="page-section">
+        <div className="container">
+          <nav aria-label="Photo navigation" style={{ marginBottom: 16 }}>
+            <Link href={`/photos/${album.slug}/`} className="back-link">
+              ← Back to {album.title}
+            </Link>
+          </nav>
+          <PageTitle
+            label="Photo gallery"
+            title={photoTitle}
+            subtitle={`Photo from ${album.title} by Broken Links.`}
           />
+          <figure className="photo-detail-figure">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={imgSrc(image.localPath)}
+              alt={imageAlt}
+              className="photo-detail-image"
+            />
+            <figcaption className="photo-detail-caption">
+              {image.title ? `${image.title} — ` : ''}{album.title}
+            </figcaption>
+          </figure>
         </div>
-      )}
-
-      {/* PhotosClient reads the URL path and opens the album + lightbox */}
-      <PhotosClient />
+      </section>
     </>
   )
 }

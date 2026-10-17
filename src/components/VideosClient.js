@@ -101,19 +101,21 @@ function VideoModal({ video, isOpen, onClose }) {
 /* ── Video Thumbnail Card ─────────────────────────────────────── */
 function VideoCard({ video, onPlay, delay = 0 }) {
   return (
-    <div
+    <a
+      href={`/videos/${video.youtubeId}/`}
       className={`video-thumb reveal delay-${delay}`}
-      onClick={() => onPlay(video)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onPlay(video) }}
+      onClick={(event) => {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+        event.preventDefault()
+        onPlay(video)
+      }}
       aria-label={`Play: ${video.title}`}
     >
       {/* Thumbnail */}
       <div className="video-thumb-img">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`}
+          src={video.thumbnail}
           alt={video.title}
           loading="lazy"
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
@@ -140,7 +142,7 @@ function VideoCard({ video, onPlay, delay = 0 }) {
           {video.title}
         </p>
       </div>
-    </div>
+    </a>
   )
 }
 

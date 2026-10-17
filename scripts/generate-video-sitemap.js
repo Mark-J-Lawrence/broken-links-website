@@ -28,7 +28,7 @@ function escapeXml(str) {
 }
 
 function videoBlock(video) {
-  const thumbnailUrl = `https://img.youtube.com/vi/${video.youtubeId}/maxresdefault.jpg`
+  const thumbnailUrl = video.thumbnail || `https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`
   const title = `Broken Links — ${video.title}`
   const description = video.description || `${video.title} by Broken Links`
   return [

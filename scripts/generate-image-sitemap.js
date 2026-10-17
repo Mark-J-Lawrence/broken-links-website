@@ -2,15 +2,14 @@
 /**
  * Generates public/sitemap-images.xml
  *
- * Sources (in priority order within each page URL):
+ * Sources:
  *   1. Album covers  — /music  (highest brand value, listed first)
  *   2. About page    — /about  (band members + promo shot)
- *   3. Photo gallery — /photos (all live/studio shots)
+ *   3. Photo pages   — /photos/[album]/[photo] (live/studio shots)
  *   4. News posts    — /news/[slug] (featured image + MDX body images per post)
  *
- * Ordering matters: Google tends to surface images that appear higher in the
- * sitemap (earlier <url> blocks) and on pages with stronger authority.
- * So album covers and the about/music pages come first.
+ * The ordering is for human readability only; it does not affect Google
+ * Images ranking. Each photo is associated with its dedicated landing page.
  *
  * Run: node scripts/generate-image-sitemap.js
  */
@@ -131,10 +130,9 @@ let totalUrls   = 0
   console.log(`  /about: ${imgs.length} images`)
 }
 
-// ── 3. PHOTOS — one <url> per individual photo page ──────────────
-//    Each photo has its own canonical URL /photos/[album]/[photo-id]/
-//    That is the page Google Images links to as the "view" destination.
-//    Listing each image only once (on its own page) avoids duplicates.
+// ── 3. PHOTO PAGES — one <url> per individual photo ──────────────
+//    Each photo has a visible landing page at /photos/[album]/[photo-id]/.
+//    Listing each image once associates it with its page and avoids duplicates.
 {
   let photoPageCount = 0
   for (const album of photosData) {

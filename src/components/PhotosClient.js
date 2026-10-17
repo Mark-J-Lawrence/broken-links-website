@@ -142,18 +142,15 @@ function PhotoModal({ photo, albumTitle, photos, albumId, isOpen, onClose, onPre
 }
 
 /* ── Album Card Component ────────────────────────────────────── */
-function AlbumCard({ album, onClick }) {
+function AlbumCard({ album, onClick, href }) {
   return (
-    <div
+    <a
+      href={href}
       className="album-card reveal"
-      onClick={onClick}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault()
-          onClick()
-        }
+      onClick={(event) => {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+        event.preventDefault()
+        onClick()
       }}
       aria-label={`View ${album.title} album (${album.count} photos)`}
     >
@@ -181,7 +178,7 @@ function AlbumCard({ album, onClick }) {
           {album.count} {album.count === 1 ? 'photo' : 'photos'}
         </p>
       </div>
-    </div>
+    </a>
   )
 }
 
@@ -303,6 +300,7 @@ export default function PhotosClient() {
                   key={album.id}
                   album={album}
                   onClick={() => handleSelectAlbum(album)}
+                  href={`/photos/${album.id}/`}
                 />
               ))}
             </div>
@@ -346,13 +344,15 @@ export default function PhotosClient() {
             <div className="container">
               <div className="photo-grid">
                 {currentPhotos.map((photo, i) => (
-                  <div
+                  <a
                     key={photo.id}
                     className={`photo-thumb reveal delay-${(i % 6) + 1}`}
-                    onClick={() => setActivePhoto(photo)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setActivePhoto(photo) }}
+                    href={`/photos/${selectedAlbum.id}/${photo.id}/`}
+                    onClick={(event) => {
+                      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+                      event.preventDefault()
+                      setActivePhoto(photo)
+                    }}
                     aria-label={`View: ${photo.caption || photo.title}`}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -367,7 +367,7 @@ export default function PhotosClient() {
                         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
                       </svg>
                     </div>
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>

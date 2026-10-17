@@ -10,7 +10,6 @@
 
 import photosData from '../../../data/photos.json'
 import PhotosClient from '../../../components/PhotosClient'
-import { imgSrc } from '../../../lib/basePath'
 
 const BASE_URL = 'https://www.brokenlinksmusic.co.uk'
 
@@ -46,36 +45,6 @@ export async function generateMetadata({ params }) {
 }
 
 /* ── Page ───────────────────────────────────────────────────────── */
-export default async function AlbumPage({ params }) {
-  const { album: albumSlug } = await params
-  const album = photosData.find((a) => a.slug === albumSlug)
-
-  return (
-    <>
-      {/*
-        Googlebot-visible static image grid for this album.
-        Hidden from sighted users but fully crawlable.
-      */}
-      {album && (
-        <div
-          aria-hidden="true"
-          style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', opacity: 0, pointerEvents: 'none' }}
-        >
-          {album.images.map((image) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              key={image.id}
-              src={imgSrc(image.localPath)}
-              alt={`Broken Links — ${album.title}${image.title ? ` — ${image.title}` : ''}`}
-              width="800"
-              height="533"
-            />
-          ))}
-        </div>
-      )}
-
-      {/* PhotosClient reads the URL path and auto-opens this album */}
-      <PhotosClient />
-    </>
-  )
+export default function AlbumPage() {
+  return <PhotosClient />
 }

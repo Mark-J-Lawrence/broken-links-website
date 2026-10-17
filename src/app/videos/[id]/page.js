@@ -37,9 +37,9 @@ export async function generateMetadata({ params }) {
       url: `${BASE_URL}/videos/${id}/`,
       images: [
         {
-          url: `https://img.youtube.com/vi/${id}/maxresdefault.jpg`,
-          width: 1280,
-          height: 720,
+          url: video.thumbnail,
+          width: 320,
+          height: 180,
           alt: `Broken Links — ${video.title}`,
         },
       ],
@@ -54,10 +54,7 @@ function videoSchema(video, id) {
     '@type': 'VideoObject',
     name: video.title,
     description: video.description || `${video.title} by Broken Links`,
-    thumbnailUrl: [
-      `https://img.youtube.com/vi/${id}/maxresdefault.jpg`,
-      `https://img.youtube.com/vi/${id}/hqdefault.jpg`,
-    ],
+    thumbnailUrl: video.thumbnail,
     uploadDate: `${video.date}T00:00:00+00:00`,
     embedUrl: `https://www.youtube.com/embed/${id}`,
     url: `${BASE_URL}/videos/${id}/`,
