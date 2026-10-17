@@ -1,14 +1,15 @@
 /**
  * /videos/[id]/page.js
  *
- * Pre-rendered static page for each individual video.
- * The client reads the URL path and auto-opens the correct video modal.
+ * Pre-rendered watch page for each individual video.
  *
  * URL pattern: /videos/mzo9d-o06DU/
  */
 
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import PageTitle from '../../../components/PageTitle'
 import videosData from '../../../data/videos.json'
-import VideosClient from '../../../components/VideosClient'
 
 const BASE_URL = 'https://www.brokenlinksmusic.co.uk'
 
@@ -71,15 +72,44 @@ export default async function VideoPage({ params }) {
   const { id } = await params
   const video = videosData.find((v) => v.youtubeId === id)
 
+  if (!video) notFound()
+
   return (
     <>
-      {video && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema(video, id)) }}
-        />
-      )}
-      <VideosClient />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema(video, id)) }}
+      />
+      <section className="page-section">
+        <div className="container">
+          <nav style={{ marginBottom: 16 }}>
+            <Link href="/videos" className="back-link">
+              ← All videos
+            </Link>
+          </nav>
+          <PageTitle
+            label={video.category}
+            title={video.title}
+            subtitle={video.description || `${video.title} by Broken Links.`}
+          />
+          <div className="video-embed-wrap" style={{ maxWidth: 900, margin: '0 auto' }}>
+            <iframe
+              src={`https://www.youtube.com/embed/${id}`}
+              title={video.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="video-embed"
+            />
+          </div>
+          <p className="card-meta" style={{ maxWidth: 900, margin: '16px auto 0' }}>
+            {new Date(video.date).toLocaleDateString('en-GB', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            })}
+          </p>
+        </div>
+      </section>
     </>
   )
 }

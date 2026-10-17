@@ -24,36 +24,6 @@ export const metadata = {
   },
 }
 
-/* Build an array of VideoObject structured data for every video */
-const videoSchemas = videosData.map((v) => ({
-  '@type': 'VideoObject',
-  name: v.title,
-  description: v.description || `${v.title} by Broken Links`,
-  thumbnailUrl: [
-    `https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg`,
-    `https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg`,
-  ],
-  uploadDate: `${v.date}T00:00:00+00:00`,
-  embedUrl: `https://www.youtube.com/embed/${v.youtubeId}`,
-  url: `${BASE_URL}/videos/${v.youtubeId}/`,
-  publisher: {
-    '@id': `${BASE_URL}/#band`,
-  },
-}))
-
-const SCHEMA = {
-  '@context': 'https://schema.org',
-  '@graph': videoSchemas,
-}
-
 export default function VideosLayout({ children }) {
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(SCHEMA) }}
-      />
-      {children}
-    </>
-  )
+  return children
 }
