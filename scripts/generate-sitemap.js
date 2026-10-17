@@ -182,6 +182,22 @@ function buildSitemap() {
   </url>`)
   }
 
+  // ── Individual photo pages — one URL per photo ────────────────
+  let photoPageCount = 0
+  for (const album of PHOTOS_DATA) {
+    if (!album.slug) continue
+    for (const image of album.images) {
+      urls.push(`  <url>
+    <loc>${BASE_URL}/photos/${album.slug}/${image.id}/</loc>
+    <lastmod>${photosLastmod}</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>`)
+      photoPageCount++
+    }
+  }
+  console.log(`Found ${photoPageCount} individual photo pages`)
+
   // ── Individual video pages — one URL per video ────────────────
   const videosLastmod = gitLastMod('src/data/videos.json') || formatDate(new Date())
   console.log(`Found ${VIDEOS_DATA.length} videos`)
@@ -207,5 +223,4 @@ ${urls.join('\n')}
 }
 
 buildSitemap()
-
 
