@@ -115,6 +115,9 @@ const SCHEMA_ORG = {
     'https://open.spotify.com/artist/0VBx7ymL8y6CI3TgOFFhTz',
     'https://music.apple.com/gb/artist/broken-links/305262241',
     'https://brokenlinks.bandcamp.com/',
+    'https://www.discogs.com/artist/2795146-Broken-Links',
+    'https://musicbrainz.org/artist/3483f312-b729-47e2-aa62-ea2183301949',
+    'https://www.wikidata.org/wiki/Q141915759',
   ],
 }
 

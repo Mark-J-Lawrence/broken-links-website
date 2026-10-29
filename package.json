@@ -4,6 +4,7 @@
   "homepage": "",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run sitemaps",
     "build": "NODE_ENV=production next build",
     "start": "next start",
     "lint": "next lint ./src",
