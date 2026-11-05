@@ -8,8 +8,10 @@
  * URL pattern: /photos/live-the-hobbit-southampton-03-10-2021/
  */
 
+import { notFound } from 'next/navigation'
 import photosData from '../../../data/photos.json'
 import PhotosClient from '../../../components/PhotosClient'
+import { getPhotoTitle, getPhotoAlt } from '../../../lib/photoHelpers'
 
 const BASE_URL = 'https://www.brokenlinksmusic.co.uk'
 
@@ -45,6 +47,41 @@ export async function generateMetadata({ params }) {
 }
 
 /* ── Page ───────────────────────────────────────────────────────── */
-export default function AlbumPage() {
-  return <PhotosClient />
+export default async function AlbumPage({ params }) {
+  const { album: albumSlug } = await params
+  const album = photosData.find((a) => a.slug === albumSlug)
+  if (!album) notFound()
+
+  const albumSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ImageGallery',
+    name: `Broken Links — ${album.title}`,
+    description: `${album.imageCount} photos from ${album.title} by Broken Links.`,
+    url: `${BASE_URL}/photos/${albumSlug}/`,
+    image: album.images.map((img, idx) => ({
+      '@type': 'ImageObject',
+      contentUrl: `${BASE_URL}${img.localPath}`,
+      name: getPhotoAlt(album, img, idx),
+      description: `Photo ${idx + 1} from ${album.title} by Broken Links.`,
+      creditText: 'Broken Links',
+      copyrightNotice: '© Broken Links. All rights reserved.',
+      license: `${BASE_URL}/photos/`,
+      acquireLicensePage: `${BASE_URL}/contact/`,
+      creator: {
+        '@type': 'Organization',
+        name: 'Broken Links',
+        url: BASE_URL,
+      },
+    })),
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(albumSchema) }}
+      />
+      <PhotosClient initialAlbumSlug={albumSlug} />
+    </>
+  )
 }

@@ -1,7 +1,9 @@
+import Link from 'next/link'
 import Image from 'next/image'
 import PageTitle from '../../components/PageTitle'
 import { imgSrc } from '../../lib/basePath'
 import albumsData from '../../data/albums.json'
+import videosData from '../../data/videos.json'
 
 const BASE_URL = 'https://www.brokenlinksmusic.co.uk'
 
@@ -132,6 +134,31 @@ function AlbumRow({ album, index }) {
             </a>
           ))}
         </div>
+
+        {/* Music Videos from this album */}
+        {(() => {
+          const albumVideos = videosData.filter(v => v.albumSlug === album.slug)
+          if (!albumVideos.length) return null
+          return (
+            <div style={{ marginTop: 20 }}>
+              <p className="section-label" style={{ marginBottom: 8, fontSize: '0.65rem' }}>
+                Music Videos
+              </p>
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                {albumVideos.map(v => (
+                  <Link
+                    key={v.youtubeId}
+                    href={`/videos/${v.youtubeId}/`}
+                    className="btn btn-secondary"
+                    style={{ fontSize: '0.65rem', padding: '6px 12px', textDecoration: 'none' }}
+                  >
+                    ▶ {v.title.replace(/\s*\(Official Video\)/i, '').replace(/\s*\(Zeuskiss Remix\)/i, ' (Remix)')}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )
+        })()}
       </div>
     </div>
   )

@@ -23,6 +23,7 @@ const DATA_DIR   = path.join(__dirname, '../src/data')
 
 const photosData = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'photos.json'),  'utf8'))
 const albumsData = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'albums.json'),  'utf8'))
+const { getPhotoTitle, getPhotoAlt } = require('../src/lib/photoHelpers')
 
 function escapeXml(str) {
   return String(str || '')
@@ -130,17 +131,34 @@ let totalUrls   = 0
   console.log(`  /about: ${imgs.length} images`)
 }
 
-// ── 3. PHOTO PAGES — one <url> per individual photo ──────────────
-//    Each photo has a visible landing page at /photos/[album]/[photo-id]/.
-//    Listing each image once associates it with its page and avoids duplicates.
+// ── 3. PHOTO ALBUMS — all images grouped by album page ──────────
+//    The album page (/photos/[album]/) has the highest authority for
+//    the event/photoshoot and contains all photos in static HTML.
+{
+  let albumCount = 0
+  for (const album of photosData) {
+    if (!album.slug || !album.images.length) continue
+    const imgs = album.images.map((img, idx) =>
+      imageBlock(img.localPath, getPhotoAlt(album, img, idx))
+    )
+    lines.push(urlBlock(`/photos/${album.slug}`, imgs))
+    lines.push('')
+    totalImages += imgs.length
+    totalUrls++
+    albumCount++
+  }
+  console.log(`  /photos/[album]: ${albumCount} album landing pages`)
+}
+
+// ── 4. PHOTO DETAIL PAGES — one <url> per individual photo ─────
+//    Each individual photo page is also included with clean descriptive metadata.
 {
   let photoPageCount = 0
   for (const album of photosData) {
     if (!album.slug) continue
-    for (const image of album.images) {
-      const caption = image.title
-        ? `Broken Links — ${album.title} — ${image.title}`
-        : `Broken Links — ${album.title}`
+    for (let idx = 0; idx < album.images.length; idx++) {
+      const image = album.images[idx]
+      const caption = getPhotoAlt(album, image, idx)
       lines.push(urlBlock(`/photos/${album.slug}/${image.id}`, [imageBlock(image.localPath, caption)]))
       lines.push('')
       totalImages++
@@ -151,7 +169,7 @@ let totalUrls   = 0
   console.log(`  /photos/[album]/[photo]: ${photoPageCount} individual photo pages`)
 }
 
-// ── 4. NEWS POSTS — featured images + MDX body images per post ────
+// ── 5. NEWS POSTS — featured images + MDX body images per post ────
 {
   const mdxFiles = fs.readdirSync(POSTS_DIR)
     .filter(f => f.endsWith('.mdx'))

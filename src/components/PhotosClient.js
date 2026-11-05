@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom'
 import PageTitle from './PageTitle'
 import photosData from '../data/photos.json'
 import { imgSrc } from '../lib/basePath'
+import { getPhotoTitle, getPhotoAlt } from '../lib/photoHelpers'
 
 /* ── Build albums with cover images ──────────────────────────── */
 const SORTED_ALBUMS_DATA = [...photosData].sort((a, b) =>
@@ -17,11 +18,12 @@ const ALL_ALBUMS = SORTED_ALBUMS_DATA.map(album => ({
   count: album.imageCount,
   date: album.date,
   coverImage: album.images[0]?.localPath || null, // First image as cover
-  images: album.images.map(img => ({
+  images: album.images.map((img, idx) => ({
     id: String(img.id),
-    title: img.title || album.title,
+    title: getPhotoTitle(album, img, idx),
     src: img.localPath,
-    caption: img.title || '',
+    caption: getPhotoTitle(album, img, idx),
+    alt: getPhotoAlt(album, img, idx),
   })),
 }))
 
@@ -100,7 +102,7 @@ function PhotoModal({ photo, albumTitle, photos, albumId, isOpen, onClose, onPre
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={photo ? imgSrc(photo.src) : undefined}
-            alt={photo ? `Broken Links — ${photo.caption || photo.title}` : ''}
+            alt={photo ? (photo.alt || `Broken Links — ${photo.caption || photo.title}`) : ''}
             className="photo-modal-img"
             style={{ visibility: photo ? 'visible' : 'hidden' }}
           />
@@ -200,11 +202,15 @@ function parsePhotosPath(pathname) {
 }
 
 /* ── Main Page ───────────────────────────────────────────────── */
-export default function PhotosClient() {
-  const [selectedAlbum, setSelectedAlbum] = useState(null)
+export default function PhotosClient({ initialAlbumSlug = null }) {
+  const initialAlbum = initialAlbumSlug
+    ? ALL_ALBUMS.find((a) => a.id === initialAlbumSlug) || null
+    : null
+
+  const [selectedAlbum, setSelectedAlbum] = useState(initialAlbum)
   const [activePhoto, setActivePhoto] = useState(null)
   const [savedScrollPosition, setSavedScrollPosition] = useState(0)
-  const [urlInitialised, setUrlInitialised] = useState(false)
+  const [urlInitialised, setUrlInitialised] = useState(!!initialAlbumSlug)
 
   const currentPhotos = selectedAlbum ? selectedAlbum.images : []
   const currentIndex = activePhoto ? currentPhotos.findIndex(p => p.id === activePhoto.id) : -1
@@ -226,6 +232,28 @@ export default function PhotosClient() {
     }
     setUrlInitialised(true)
   }, [urlInitialised])
+
+  // ── Browser back/forward button navigation ──────────────────
+  useEffect(() => {
+    const handlePopState = () => {
+      const { albumSlug, photoId } = parsePhotosPath(window.location.pathname)
+      if (albumSlug) {
+        const album = ALL_ALBUMS.find((a) => a.id === albumSlug) || null
+        setSelectedAlbum(album)
+        if (album && photoId) {
+          const photo = album.images.find((p) => p.id === photoId) || null
+          setActivePhoto(photo)
+        } else {
+          setActivePhoto(null)
+        }
+      } else {
+        setSelectedAlbum(null)
+        setActivePhoto(null)
+      }
+    }
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
 
   // Scroll to top when album is selected
   useEffect(() => {
@@ -266,13 +294,13 @@ export default function PhotosClient() {
   const handleSelectAlbum = (album) => {
     setSavedScrollPosition(window.scrollY)
     setSelectedAlbum(album)
-    window.history.replaceState(null, '', `/photos/${album.id}/`)
+    window.history.pushState(null, '', `/photos/${album.id}/`)
   }
 
   const handleBackToAlbums = () => {
     setSelectedAlbum(null)
     setActivePhoto(null)
-    window.history.replaceState(null, '', '/photos/')
+    window.history.pushState(null, '', '/photos/')
   }
 
   const totalPhotos = ALL_ALBUMS.reduce((sum, album) => sum + album.count, 0)
@@ -315,13 +343,18 @@ export default function PhotosClient() {
           <div className="filter-bar">
             <div className="container">
               <div className="filter-bar-inner">
-                <button
+                <a
+                  href="/photos/"
                   className="btn btn-secondary"
-                  onClick={handleBackToAlbums}
-                  style={{ fontSize: '0.75rem', padding: '8px 16px' }}
+                  onClick={(event) => {
+                    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+                    event.preventDefault()
+                    handleBackToAlbums()
+                  }}
+                  style={{ fontSize: '0.75rem', padding: '8px 16px', display: 'inline-block', textDecoration: 'none' }}
                 >
                   ← Back to Albums
-                </button>
+                </a>
                 <div>
                   <h2 style={{
                     fontSize: '1.25rem',
@@ -358,7 +391,7 @@ export default function PhotosClient() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={imgSrc(photo.src)}
-                      alt={`Broken Links — ${photo.caption || photo.title}`}
+                      alt={photo.alt || `Broken Links — ${photo.caption || photo.title}`}
                       loading="lazy"
                       style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                     />

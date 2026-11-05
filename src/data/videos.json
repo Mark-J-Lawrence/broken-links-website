@@ -6,6 +6,9 @@
     "description": "Official video for 'Disconnect (Zeuskiss Remix)' — taken from the remix album Konflix::Statez (2022).",
     "date": "2022-03-18",
     "category": "Music Video",
+    "duration": "PT4M45S",
+    "durationSeconds": 285,
+    "albumSlug": "konflix-statez",
     "thumbnail": "https://img.youtube.com/vi/mzo9d-o06DU/mqdefault.jpg"
   },
   {
@@ -15,6 +18,9 @@
     "description": "Official music video for 'Fatalism' — taken from the album Conflict::States (2021).",
     "date": "2021-11-05",
     "category": "Music Video",
+    "duration": "PT5M00S",
+    "durationSeconds": 300,
+    "albumSlug": "conflict-states",
     "thumbnail": "https://img.youtube.com/vi/Qu9HaA3J0W0/mqdefault.jpg"
   },
   {
@@ -24,6 +30,9 @@
     "description": "Official music video for 'Year XI' — taken from the album Conflict::States (2021).",
     "date": "2021-10-08",
     "category": "Music Video",
+    "duration": "PT4M54S",
+    "durationSeconds": 294,
+    "albumSlug": "conflict-states",
     "thumbnail": "https://img.youtube.com/vi/UUBMJ7SnULU/mqdefault.jpg"
   },
   {
@@ -33,6 +42,9 @@
     "description": "Official music video for 'Antibiotics' — taken from the album Conflict::States (2021).",
     "date": "2021-08-31",
     "category": "Music Video",
+    "duration": "PT4M40S",
+    "durationSeconds": 280,
+    "albumSlug": "conflict-states",
     "thumbnail": "https://img.youtube.com/vi/Du3gJyR58l4/mqdefault.jpg"
   },
   {
@@ -42,6 +54,9 @@
     "description": "Official music video for 'Monolith' — taken from the album Conflict::States (2021).",
     "date": "2021-08-13",
     "category": "Music Video",
+    "duration": "PT4M08S",
+    "durationSeconds": 248,
+    "albumSlug": "conflict-states",
     "thumbnail": "https://img.youtube.com/vi/yISeYjEFrz8/mqdefault.jpg"
   },
   {
@@ -51,6 +66,9 @@
     "description": "Official music video for 'T.T.O.' — taken from the album Conflict::States (2021).",
     "date": "2021-07-23",
     "category": "Music Video",
+    "duration": "PT4M02S",
+    "durationSeconds": 242,
+    "albumSlug": "conflict-states",
     "thumbnail": "https://img.youtube.com/vi/j4jlM-g6GRg/mqdefault.jpg"
   },
   {
@@ -60,6 +78,9 @@
     "description": "Official music video for 'The Day Called X' — taken from the album Conflict::States (2021).",
     "date": "2021-06-18",
     "category": "Music Video",
+    "duration": "PT5M22S",
+    "durationSeconds": 322,
+    "albumSlug": "conflict-states",
     "thumbnail": "https://img.youtube.com/vi/WuCI6PyDK38/mqdefault.jpg"
   },
   {
@@ -69,6 +90,9 @@
     "description": "Official music video for 'Cold War' — taken from the album Conflict::States (2021).",
     "date": "2021-05-21",
     "category": "Music Video",
+    "duration": "PT4M38S",
+    "durationSeconds": 278,
+    "albumSlug": "conflict-states",
     "thumbnail": "https://img.youtube.com/vi/myeLM9N3MXk/mqdefault.jpg"
   },
   {
@@ -78,6 +102,9 @@
     "description": "Official music video for 'Replicas' — taken from the album Conflict::States (2021). \"Identity is a beautiful thing. Have one.\" — Mark",
     "date": "2021-04-16",
     "category": "Music Video",
+    "duration": "PT3M52S",
+    "durationSeconds": 232,
+    "albumSlug": "conflict-states",
     "thumbnail": "https://img.youtube.com/vi/Mr8dUGKj2ZQ/mqdefault.jpg"
   },
   {
@@ -87,6 +114,9 @@
     "description": "Official music video for 'Pioneers' — taken from the album Conflict::States (2021). Uber Rock Video of the Week. \"This song is about all the people out there that truly believe in something and are bravely defiant, continually fighting till what they believe in is accepted by society.\" — Mark",
     "date": "2021-02-26",
     "category": "Music Video",
+    "duration": "PT3M31S",
+    "durationSeconds": 211,
+    "albumSlug": "conflict-states",
     "thumbnail": "https://img.youtube.com/vi/j8OtHWe6zDA/mqdefault.jpg"
   },
   {
@@ -96,6 +126,9 @@
     "description": "Official music video for 'The Bounty Hunter' — taken from the album Divide/Restore (2015).",
     "date": "2015-06-19",
     "category": "Music Video",
+    "duration": "PT4M10S",
+    "durationSeconds": 250,
+    "albumSlug": "divide-restore",
     "thumbnail": "https://img.youtube.com/vi/5DZuqbEytKU/mqdefault.jpg"
   },
   {
@@ -105,6 +138,9 @@
     "description": "Official music video for 'Dead Embers' — taken from the album Divide/Restore (2015).",
     "date": "2014-07-10",
     "category": "Music Video",
+    "duration": "PT3M55S",
+    "durationSeconds": 235,
+    "albumSlug": "divide-restore",
     "thumbnail": "https://img.youtube.com/vi/Tr27BSpQjyg/mqdefault.jpg"
   },
   {
@@ -114,6 +150,8 @@
     "description": "Broken Links interviewed on Shell Shocked Radio about Conflict::States.",
     "date": "2021-08-17",
     "category": "Interview",
+    "duration": "PT24M18S",
+    "durationSeconds": 1458,
     "thumbnail": "https://img.youtube.com/vi/0C9zXkNxgVY/mqdefault.jpg"
   },
   {
@@ -123,6 +161,9 @@
     "description": "Official music video for 'What Are You Waiting For?' — taken from the début album 'Disasters: Ways To Leave A Scene' (2012). Directed by Nick Jewell.",
     "date": "2012-04-11",
     "category": "Music Video",
+    "duration": "PT3M32S",
+    "durationSeconds": 212,
+    "albumSlug": "disasters-ways-to-leave-a-scene",
     "thumbnail": "https://img.youtube.com/vi/UvKmnOSl35s/mqdefault.jpg"
   },
   {
@@ -132,6 +173,9 @@
     "description": "Official music video for 'We're All Paranoid' — taken from the début album 'Disasters: Ways To Leave A Scene' (2012). Filmed by Hanover Pictures.",
     "date": "2012-07-29",
     "category": "Music Video",
+    "duration": "PT3M45S",
+    "durationSeconds": 225,
+    "albumSlug": "disasters-ways-to-leave-a-scene",
     "thumbnail": "https://img.youtube.com/vi/5pzEq5aewA0/mqdefault.jpg"
   },
   {
@@ -141,6 +185,9 @@
     "description": "Official music video for 'Within Isolation' — taken from the début album 'Disasters: Ways To Leave A Scene' (2012). A post-apocalyptic narrative following lone survivor John Doe. Filmed by The Red Red.",
     "date": "2012-10-10",
     "category": "Music Video",
+    "duration": "PT4M15S",
+    "durationSeconds": 255,
+    "albumSlug": "disasters-ways-to-leave-a-scene",
     "thumbnail": "https://img.youtube.com/vi/tBKljsVbjeQ/mqdefault.jpg"
   }
 ]

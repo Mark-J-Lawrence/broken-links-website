@@ -31,20 +31,26 @@ function videoBlock(video) {
   const thumbnailUrl = video.thumbnail || `https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`
   const title = `Broken Links — ${video.title}`
   const description = video.description || `${video.title} by Broken Links`
-  return [
+  const parts = [
     '    <video:video>',
     `      <video:thumbnail_loc>${escapeXml(thumbnailUrl)}</video:thumbnail_loc>`,
     `      <video:title>${escapeXml(title)}</video:title>`,
     `      <video:description>${escapeXml(description)}</video:description>`,
     `      <video:player_loc>https://www.youtube.com/embed/${video.youtubeId}</video:player_loc>`,
+  ]
+  if (video.durationSeconds) {
+    parts.push(`      <video:duration>${video.durationSeconds}</video:duration>`)
+  }
+  parts.push(
     `      <video:publication_date>${video.date}T00:00:00+00:00</video:publication_date>`,
     `      <video:category>${escapeXml(video.category)}</video:category>`,
     '      <video:tag>Broken Links</video:tag>',
     '      <video:tag>dark rock</video:tag>',
     '      <video:tag>Southampton band</video:tag>',
     `      <video:tag>${escapeXml(video.category)}</video:tag>`,
-    '    </video:video>',
-  ].join('\n')
+    '    </video:video>'
+  )
+  return parts.join('\n')
 }
 
 const lines = [
