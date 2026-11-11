@@ -4,8 +4,26 @@ import { useState, useEffect, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import PageTitle from './PageTitle'
 import photosData from '../data/photos.json'
+import gigsData from '../data/gigs.json'
 import { imgSrc } from '../lib/basePath'
 import { getPhotoTitle, getPhotoAlt } from '../lib/photoHelpers'
+
+const PHOTO_TO_GIG_MAP = {
+  'live-music-in-the-city-southampton-12-09-2026': '2026-09-12-music-in-the-city',
+  'live-the-hobbit-southampton-03-10-2021': '2021-10-03-the-hobbit',
+  'live-the-hobbit-southampton-09-10-2021': '2021-10-09-the-hobbit',
+  'live-the-loft-southampton-11112017': '2017-11-11-the-loft',
+  'live-the-1865-southampton-161015': '2015-10-16-the-1865',
+  'live-drift-bar-southsea-oct-2014': '2014-10-19-drift-bar',
+  'supporting-chameleonsvox-the-forum-bielefeld-germany': '2014-09-26-forum-bielefeld',
+  'live-rattlesnake-2013': '2013-06-20-the-rattlesnake',
+  'live-at-the-rattlesnake-of-angel-london': '2013-03-29-the-rattlesnake',
+  'live-the-cellar-southampton': '2012-05-13-the-cellar',
+  'karel-music-expo-2011-cagliari-sardinia': '2011-06-10-karel-music-expo-2011',
+  'prototypescauseeffect-ep-launch-30042011': '2011-04-30-the-joiners-arms',
+  'live-the-railway-15012009': '2009-01-15-the-railway-inn',
+  'live-the-joiners-27122008': '2008-12-27-the-joiners-arms',
+}
 
 /* ── Build albums with cover images ──────────────────────────── */
 const SORTED_ALBUMS_DATA = [...photosData].sort((a, b) =>
@@ -304,6 +322,8 @@ export default function PhotosClient({ initialAlbumSlug = null }) {
   }
 
   const totalPhotos = ALL_ALBUMS.reduce((sum, album) => sum + album.count, 0)
+  const matchingGigSlug = selectedAlbum ? PHOTO_TO_GIG_MAP[selectedAlbum.id] : null
+  const matchingGig = matchingGigSlug ? gigsData.find((g) => g.slug === matchingGigSlug) : null
 
   return (
     <>
@@ -368,6 +388,24 @@ export default function PhotosClient({ initialAlbumSlug = null }) {
                     {selectedAlbum.count} {selectedAlbum.count === 1 ? 'photo' : 'photos'}
                   </p>
                 </div>
+                {matchingGig && (
+                  <a
+                    href={`/live/events/${matchingGig.slug}/`}
+                    className="btn btn-outline"
+                    style={{
+                      fontSize: '0.75rem',
+                      padding: '8px 16px',
+                      textDecoration: 'none',
+                      marginLeft: 'auto',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 6,
+                    }}
+                  >
+                    <span>📍 View Live Show ({matchingGig.date})</span>
+                    <span>↗</span>
+                  </a>
+                )}
               </div>
             </div>
           </div>

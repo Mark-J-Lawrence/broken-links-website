@@ -12,6 +12,7 @@ import PageTitle from '../../../components/PageTitle'
 import videosData from '../../../data/videos.json'
 import albumsData from '../../../data/albums.json'
 import { imgSrc } from '../../../lib/basePath'
+import { getRelatedPostsForVideo, getRelatedPhotoAlbumForVideo } from '../../../lib/crossLinks'
 
 const BASE_URL = 'https://www.brokenlinksmusic.co.uk'
 
@@ -26,15 +27,19 @@ export async function generateMetadata({ params }) {
   const video = videosData.find((v) => v.youtubeId === id)
   if (!video) return { title: 'Video Not Found' }
 
+  const description = video.lyrics
+    ? `${video.title} official video by Broken Links. Includes full song lyrics, album context, and streaming links.`
+    : video.description || `${video.title} by Broken Links.`
+
   return {
     title: `${video.title} — Videos`,
-    description: video.description || `${video.title} by Broken Links.`,
+    description,
     alternates: {
       canonical: `${BASE_URL}/videos/${id}/`,
     },
     openGraph: {
       title: `${video.title} — Broken Links`,
-      description: video.description || `${video.title} by Broken Links.`,
+      description,
       type: 'video.other',
       url: `${BASE_URL}/videos/${id}/`,
       images: [
@@ -76,6 +81,9 @@ function videoSchema(video, id) {
   }
   if (video.duration) {
     schema.duration = video.duration
+  }
+  if (video.lyrics) {
+    schema.transcript = video.lyrics
   }
   return schema
 }
@@ -123,6 +131,9 @@ export default async function VideoPage({ params }) {
     .filter((v) => v.youtubeId !== id)
     .slice(0, 3)
 
+  const relatedPosts = getRelatedPostsForVideo(video)
+  const relatedPhotoAlbum = getRelatedPhotoAlbumForVideo(video)
+
   return (
     <>
       <script
@@ -168,6 +179,84 @@ export default async function VideoPage({ params }) {
               </span>
             )}
           </div>
+
+          {/* Song Lyrics Section */}
+          {video.lyrics && (
+            <div
+              className="card"
+              style={{
+                maxWidth: 900,
+                margin: '32px auto 0',
+                padding: '24px 28px',
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                <div>
+                  <p className="section-label" style={{ marginBottom: 4 }}>Words & Music</p>
+                  <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text-primary)' }}>
+                    Lyrics
+                  </h3>
+                </div>
+                {album?.streaming?.bandcamp && (
+                  <a
+                    href={album.streaming.bandcamp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-outline"
+                    style={{ fontSize: '0.7rem', padding: '6px 12px' }}
+                  >
+                    Bandcamp ↗
+                  </a>
+                )}
+              </div>
+              <div
+                style={{
+                  whiteSpace: 'pre-line',
+                  color: 'var(--text-primary)',
+                  fontSize: '0.95rem',
+                  lineHeight: 1.9,
+                  fontFamily: 'var(--font-sans)',
+                  borderLeft: '2px solid var(--accent, #d4af37)',
+                  paddingLeft: 20,
+                  marginTop: 16,
+                }}
+              >
+                {video.lyrics}
+              </div>
+            </div>
+          )}
+
+          {/* Prompt to read lyrics on Bandcamp when not stored locally */}
+          {!video.lyrics && album?.streaming?.bandcamp && (
+            <div
+              style={{
+                maxWidth: 900,
+                margin: '24px auto 0',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '14px 20px',
+                background: 'rgba(255, 255, 255, 0.02)',
+                border: '1px solid var(--border)',
+                borderRadius: 4,
+                gap: 12,
+                flexWrap: 'wrap',
+              }}
+            >
+              <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                Full song lyrics, credits, and streaming available on Bandcamp
+              </span>
+              <a
+                href={album.streaming.bandcamp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline"
+                style={{ fontSize: '0.7rem', padding: '6px 12px' }}
+              >
+                Read on Bandcamp ↗
+              </a>
+            </div>
+          )}
 
           {/* Featured Album context */}
           {album && (
@@ -237,6 +326,89 @@ export default async function VideoPage({ params }) {
               <strong>Broken Links:</strong> Mark Lawrence (Vocals, Guitar) • Lewis Betteridge (Bass) • Phil Boulter (Drums)
             </p>
           </div>
+
+          {/* Behind the Scenes Photo Gallery Cross-Link */}
+          {relatedPhotoAlbum && (
+            <div
+              className="card"
+              style={{
+                maxWidth: 900,
+                margin: '24px auto 0',
+                padding: '20px 24px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                gap: 16,
+                flexWrap: 'wrap',
+              }}
+            >
+              <div>
+                <p className="section-label" style={{ marginBottom: 4 }}>Behind the Scenes</p>
+                <h4 style={{ margin: 0, fontSize: '1.05rem', color: 'var(--text-primary)' }}>
+                  📷 {relatedPhotoAlbum.title}
+                </h4>
+                <p style={{ margin: '4px 0 0', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                  {relatedPhotoAlbum.imageCount} exclusive behind-the-scenes photos from the making of this video.
+                </p>
+              </div>
+              <Link
+                href={`/photos/${relatedPhotoAlbum.slug}/`}
+                className="btn btn-outline"
+                style={{ fontSize: '0.75rem', padding: '8px 16px' }}
+              >
+                View Photo Gallery ↗
+              </Link>
+            </div>
+          )}
+
+          {/* Related News & Editorial Press Coverage */}
+          {relatedPosts.length > 0 && (
+            <div
+              className="card"
+              style={{
+                maxWidth: 900,
+                margin: '32px auto 0',
+                padding: '24px 28px',
+              }}
+            >
+              <p className="section-label" style={{ marginBottom: 4 }}>Press & Editorial Coverage</p>
+              <h3 style={{ margin: '0 0 16px', fontSize: '1.2rem', color: 'var(--text-primary)' }}>
+                Related News & Features
+              </h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {relatedPosts.map((post) => (
+                  <Link
+                    key={post.slug}
+                    href={`/news/${post.slug}/`}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      padding: '12px 16px',
+                      background: 'rgba(255, 255, 255, 0.02)',
+                      border: '1px solid var(--border)',
+                      borderRadius: 4,
+                      textDecoration: 'none',
+                      gap: 16,
+                      flexWrap: 'wrap',
+                    }}
+                  >
+                    <div>
+                      <span style={{ fontSize: '0.9rem', color: 'var(--text-primary)', fontWeight: 500 }}>
+                        {post.title}
+                      </span>
+                      <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 2 }}>
+                        {post.category?.toUpperCase()} • {post.date}
+                      </span>
+                    </div>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--accent, #d4af37)' }}>
+                      Read Article ↗
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Related / More Videos Section */}
           <div style={{ maxWidth: 900, margin: '48px auto 0' }}>

@@ -1,5 +1,10 @@
 'use client'
 
+import Link from 'next/link'
+import videosData from '../data/videos.json'
+
+const KNOWN_VIDEO_IDS = new Set(videosData.map((v) => v.youtubeId))
+
 /**
  * YouTubeEmbed — renders a responsive 16:9 YouTube iframe embed.
  * Used in MDX blog posts via the MDX_COMPONENTS map.
@@ -10,6 +15,8 @@
  */
 export default function YouTubeEmbed({ id, caption }) {
   if (!id) return null
+
+  const isDedicated = KNOWN_VIDEO_IDS.has(id)
 
   return (
     <figure className="yt-embed">
@@ -25,6 +32,22 @@ export default function YouTubeEmbed({ id, caption }) {
       </div>
       {caption && (
         <figcaption className="yt-embed-caption">{caption}</figcaption>
+      )}
+      {isDedicated && (
+        <div style={{ marginTop: 8, textAlign: 'right' }}>
+          <Link
+            href={`/videos/${id}/`}
+            style={{
+              fontSize: '0.75rem',
+              color: 'var(--accent, #d4af37)',
+              textDecoration: 'none',
+              fontFamily: 'var(--font-mono, monospace)',
+              display: 'inline-block',
+            }}
+          >
+            ▶ Watch on Broken Links Video Page ↗
+          </Link>
+        </div>
       )}
     </figure>
   )

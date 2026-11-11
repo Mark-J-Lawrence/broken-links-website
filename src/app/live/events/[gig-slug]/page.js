@@ -3,6 +3,7 @@ import Link from 'next/link'
 import PageTitle from '../../../../components/PageTitle'
 import gigsData from '../../../../data/gigs.json'
 import venuesData from '../../../../data/venues.json'
+import { getRelatedPhotoAlbumForGig, getRelatedPostForGig } from '../../../../lib/crossLinks'
 
 const BASE_URL = 'https://www.brokenlinksmusic.co.uk'
 
@@ -163,6 +164,8 @@ export default async function EventPage({ params }) {
     )
     const dateLabel = formatDate(gig.date, gig.time)
     const schema = getEventSchema(gig, venue)
+    const relatedPhotoAlbum = getRelatedPhotoAlbumForGig(gig)
+    const relatedPost = getRelatedPostForGig(gig)
 
     return (
         <>
@@ -233,6 +236,26 @@ export default async function EventPage({ params }) {
                                     <span className="venue-detail-value">{gig.tour}</span>
                                 </div>
                             )}
+                            {relatedPhotoAlbum && (
+                                <div className="venue-detail-row">
+                                    <span className="venue-detail-label">Photos</span>
+                                    <span className="venue-detail-value">
+                                        <Link href={`/photos/${relatedPhotoAlbum.slug}/`} className="venue-detail-link" style={{ fontWeight: 600 }}>
+                                            📷 {relatedPhotoAlbum.imageCount} Live Photos ↗
+                                        </Link>
+                                    </span>
+                                </div>
+                            )}
+                            {relatedPost && (
+                                <div className="venue-detail-row">
+                                    <span className="venue-detail-label">Coverage</span>
+                                    <span className="venue-detail-value">
+                                        <Link href={`/news/${relatedPost.slug}/`} className="venue-detail-link" style={{ fontWeight: 600 }}>
+                                            📰 {relatedPost.title} ↗
+                                        </Link>
+                                    </span>
+                                </div>
+                            )}
                             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 24 }}>
                                 {hasTicketPage && (
                                     <a href={gig.ticketUrl} className="btn btn-outline" target="_blank" rel="noopener noreferrer">
@@ -242,6 +265,16 @@ export default async function EventPage({ params }) {
                                 <Link href={`/live/venues/${gig.venueSlug}`} className="btn btn-outline">
                                     Venue details
                                 </Link>
+                                {relatedPhotoAlbum && (
+                                    <Link href={`/photos/${relatedPhotoAlbum.slug}/`} className="btn btn-secondary">
+                                        Live Photos ({relatedPhotoAlbum.imageCount}) ↗
+                                    </Link>
+                                )}
+                                {relatedPost && (
+                                    <Link href={`/news/${relatedPost.slug}/`} className="btn btn-secondary">
+                                        Show Review ↗
+                                    </Link>
+                                )}
                             </div>
                         </div>
 
@@ -277,6 +310,57 @@ export default async function EventPage({ params }) {
                             </div>
                         </div>
                     </div>
+
+                    {(relatedPhotoAlbum || relatedPost) && (
+                        <div className="card reveal" style={{ marginTop: 32, padding: 24 }}>
+                            <p className="section-label" style={{ marginBottom: 8 }}>From the Archive</p>
+                            <h3 style={{ margin: '0 0 16px', fontSize: '1.2rem', color: 'var(--text-primary)' }}>
+                                Media & Coverage from this Show
+                            </h3>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
+                                {relatedPhotoAlbum && (
+                                    <Link
+                                        href={`/photos/${relatedPhotoAlbum.slug}/`}
+                                        className="card"
+                                        style={{
+                                            textDecoration: 'none',
+                                            padding: 16,
+                                            border: '1px solid var(--border)',
+                                            display: 'block'
+                                        }}
+                                    >
+                                        <p className="card-meta" style={{ marginBottom: 4 }}>Live Photo Gallery</p>
+                                        <p style={{ margin: '0 0 8px', fontWeight: 600, color: 'var(--text-primary)' }}>
+                                            📷 {relatedPhotoAlbum.title}
+                                        </p>
+                                        <span style={{ fontSize: '0.8rem', color: 'var(--accent, #d4af37)' }}>
+                                            View {relatedPhotoAlbum.imageCount} Live Photos ↗
+                                        </span>
+                                    </Link>
+                                )}
+                                {relatedPost && (
+                                    <Link
+                                        href={`/news/${relatedPost.slug}/`}
+                                        className="card"
+                                        style={{
+                                            textDecoration: 'none',
+                                            padding: 16,
+                                            border: '1px solid var(--border)',
+                                            display: 'block'
+                                        }}
+                                    >
+                                        <p className="card-meta" style={{ marginBottom: 4 }}>Live Review & Coverage</p>
+                                        <p style={{ margin: '0 0 8px', fontWeight: 600, color: 'var(--text-primary)' }}>
+                                            📰 {relatedPost.title}
+                                        </p>
+                                        <span style={{ fontSize: '0.8rem', color: 'var(--accent, #d4af37)' }}>
+                                            Read Full Article ↗
+                                        </span>
+                                    </Link>
+                                )}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </section>
         </>
